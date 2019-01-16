@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题目描述https://tianchi.shuju.aliyun.com/outsource/offer/projectdetails.htm?spm=5176.8199929.0.0.nPvIru&amp;amp;id=3092机场每天都有大量的航班起降，每个航班降落以后都会分配到一个指定的机位进行保障，保障结束以后再离开进行下一航段。为了保障每个航班都有相应的机位，机场会提前安排好第二天的所有飞机机位">
+<meta name="keywords" content="停机位,线性规划,破坏与重建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机场停机位资源分配优化">
+<meta property="og:url" content="http://yoursite.com/2017/01/01/机场停机位资源分配优化/index.html">
+<meta property="og:site_name" content="布笠Blog">
+<meta property="og:description" content="题目描述https://tianchi.shuju.aliyun.com/outsource/offer/projectdetails.htm?spm=5176.8199929.0.0.nPvIru&amp;amp;id=3092机场每天都有大量的航班起降，每个航班降落以后都会分配到一个指定的机位进行保障，保障结束以后再离开进行下一航段。为了保障每个航班都有相应的机位，机场会提前安排好第二天的所有飞机机位">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/airport/1.png">
+<meta property="og:updated_time" content="2019-01-16T16:33:54.798Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机场停机位资源分配优化">
+<meta name="twitter:description" content="题目描述https://tianchi.shuju.aliyun.com/outsource/offer/projectdetails.htm?spm=5176.8199929.0.0.nPvIru&amp;amp;id=3092机场每天都有大量的航班起降，每个航班降落以后都会分配到一个指定的机位进行保障，保障结束以后再离开进行下一航段。为了保障每个航班都有相应的机位，机场会提前安排好第二天的所有飞机机位">
+<meta name="twitter:image" content="http://yoursite.com/images/airport/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/01/机场停机位资源分配优化/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机场停机位资源分配优化 | 布笠Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">布笠Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/01/机场停机位资源分配优化/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="布笠">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="布笠Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机场停机位资源分配优化
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-01-01 21:45:48" itemprop="dateCreated datePublished" datetime="2017-01-01T21:45:48+08:00">2017-01-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-17 00:33:54" itemprop="dateModified" datetime="2019-01-17T00:33:54+08:00">2019-01-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/竞赛/" itemprop="url" rel="index"><span itemprop="name">竞赛</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <a href="/2017/01/01/机场停机位资源分配优化/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/01/01/机场停机位资源分配优化/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><a href="https://tianchi.shuju.aliyun.com/outsource/offer/projectdetails.htm?spm=5176.8199929.0.0.nPvIru&amp;id=3092" target="_blank" rel="noopener">https://tianchi.shuju.aliyun.com/outsource/offer/projectdetails.htm?spm=5176.8199929.0.0.nPvIru&amp;id=3092</a><br>机场每天都有大量的航班起降，每个航班降落以后都会分配到一个指定的机位进行保障，保障结束以后再离开进行下一航段。为了保障每个航班都有相应的机位，机场会提前安排好第二天的所有飞机机位资源。<br><a id="more"></a></p>
+<h2 id="成绩"><a href="#成绩" class="headerlink" title="成绩"></a>成绩</h2><p>复赛：得分14.40，排行榜第一名；<br>决赛：第一名</p>
+<h2 id="总体思路"><a href="#总体思路" class="headerlink" title="总体思路"></a>总体思路</h2><p>1、    求解初始解：使用贪心算法快速得到一个可行解<br>2、    优化解：使用优化算法对初始解进行优化，我们采用的优化算法是破坏与重建算法</p>
+<h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><p>按时间顺序遍历每个航班，对每个航班执行下面操作：尝试安排到其可安排的机位中，若当前机位能安排（能安排代表满足各种约束）就直接安排，若没有机位能安排当前航班，则当前航班不安排。<br>只需不到1秒的时间，生成了13.28的初始可行解。</p>
+<h2 id="破坏与重建算法"><a href="#破坏与重建算法" class="headerlink" title="破坏与重建算法"></a>破坏与重建算法</h2><p>步骤一、对一个已知的初始解，破坏掉一些已经被安排的航班，即一个破坏过程；<br>步骤二、对剩下已经安排的航班其机位保持不变，将当前所有未安排的航班使用线性规划模型求解当前情况下的最优解，即一个重建过程；<br>步骤三、重复此破坏与重建过程，持续对解进行优化，直到满足一个停止条件。</p>
+<p>算法评价：此算法通过破坏可以打破局部约束，使其可以达到一个更优的解；通过线性规划模型进行重建，使其可以得到当前情况下的最优解，这个解不会比初始解差；由于已分配机位的航班在时间上是均匀分布，影响剩下航班的分配，因此未分配的航班虽多但重建效率很快。</p>
+<h2 id="线性规划模型"><a href="#线性规划模型" class="headerlink" title="线性规划模型"></a>线性规划模型</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>二进制变量$g_{ij}∈G$表示航班分配机位的情况：<br>$$<br>g_{ij}=\begin{cases}<br>1&amp; \text{航班i分配到机位j}\\<br>0&amp; \text{航班i没有分配到机位j} \end{cases}<br>$$<br>滑道冲突的计算与机位的入滑道和出滑道有关，但和具体机位是无关的，具体不同滑道可以表示为$p_k∈P$;<br>二进制变量$d_{ik}∈D$表示航班滑道冲突的情况：<br>$$<br>d_{ik}∈\begin{cases}<br>1&amp;\text{航班i的滑道为$p_k$，且和其它航班滑道冲突}\\<br>0&amp;\text{航班i的滑道非$p_k$，或和其它航班没有滑道冲突}<br>\end{cases}<br>$$<br>每个航班的旅客人数用$h_i∈H$来表示，总的旅客人数为$h_sum=\sum_ih_i $；<br>定义总的航班数量为$n$，总的机位数量为$m$；</p>
+<h3 id="目标函数"><a href="#目标函数" class="headerlink" title="目标函数"></a>目标函数</h3><p>$$F(G,P,D)=max\sum_{i,j}10×\frac{g_{ij}}{n}+3×\frac{g_{ij}×1\{机位j是近机位\}}{n}+3×g_{ij}×1\{机位j是近机位\}×\frac{h_i}{h_{sum}} -1×\frac{g_{ij}×1\{机位j是临时机位\}}{n}-\sum_{i,k}1×\frac{d_{ik}}{n}$$</p>
+<h3 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a>约束条件</h3><ol>
+<li>对于初始固定的航班添加约束：$$∀i,j航班i预先分配到机位j\longrightarrow g_{ij}=0$$$$∀i航班i不分配机位\longrightarrow∀j,g_{ij}=0$$</li>
+<li>保证每个航班只会分配一个机位：$$∀i\longrightarrow\sum_jg_{ij} ≤1$$</li>
+<li>保证航班只能分配到可以分配的机位：$$∀i,j航班i不能分配到机位j\longrightarrow g_{ij}=0$$</li>
+<li>保证在同一个机位上的航班满足十分钟约束：$$∀i_1,i_2,j且航班i_1 和航班i_2 不满足十分钟约束\longrightarrow g_{i_1j }+g_{i_2 j}≤1$$</li>
+<li>保证在机位发生重合时也满足十分钟约束：$$∀i_1,i_2,j_1,j_2 且机位j_1 和机位j_2 重合，航班i_1 和航班i_2 不满足十分钟约束\longrightarrow g_{i_1j_1}+g_{i_2 j_2}≤1$$</li>
+<li>保证分配方案满足阻挡的约束：$$∀i_1,i_2,j_1,j_2 且航班i_1 在机位j_1 阻挡航班i_2 进入机位j_2\longrightarrow g_{i_1j_1 }+g_{i_2 j_2}≤1$$</li>
+<li>滑道冲突约束，航班的滑道冲突和分配的机位相关：$$∀i,k\longrightarrow \sum_jg_{ij}×1\{机位j的滑道为p_k \} ≥d_{ik}$$</li>
+<li>滑道冲突约束，当航班分配了机位且存在滑道冲突时，$d_ik$为1,$c$是一个很大的常数：$$∀i,k\longrightarrow \sum_jg_{ij}×1\{机位j的滑道为p_k \} +\sum_{i_1≠i,j_1}\frac{g_{i_1j_1}×1\{航班i在滑道k与航班i_1在滑道j_1滑道冲突\}}{c}≤d_{ik}$$<br><br><h3 id="模型优化"><a href="#模型优化" class="headerlink" title="模型优化"></a>模型优化</h3><ol>
+<li>机位冲突优化：<br>对于上面的第4个约束，同一机位的航班满足10分钟约束，以及第5个约束，机位发生重合时满足十分钟约束，可以换一种思路去考虑，换成:任何一个位置在任何一个时刻最多只有一架飞机，一个飞机占用这个位置的时间为$[in\_time,out\_time+10)$,也既是：$$∀i_1,i_2,…,i_n,j_1,j_2,…,j_m 且航班i_1 到航班i_n 包含同一个时刻，机位j_1 到机位j_n 包含同一个位置\longrightarrow \sum_j\sum_ig_{ij} ≤1$$<br>进行这样的优化后，将很多的单独的约束合并为一个约束了，模型占用的内存减少了很多，数据中独立的时刻只有1800多个。</li>
+<li>滑道冲突优化：<br>对于滑道冲突的约束计算，假如是通过枚举两个航班和其分配的两个机位来判断冲突，时间复杂度为$O(n^2 m^2)$，这样的计算造成运行效率低和内存消耗大。<br>在我们的方法中，滑道约束8的计算只需要枚举两个航班以及对应的滑道即可，滑道的数量远小于机位的数量，极大的提高了运行效率以及降低内存消耗。</li>
+</ol>
+</li>
+</ol>
+<h2 id="破坏方式"><a href="#破坏方式" class="headerlink" title="破坏方式"></a>破坏方式</h2><p>不同的破坏方式，打破局部约束的能力不一样，所以我们制定了三种基本的破坏方式：</p>
+<ol>
+<li>随机航班破坏：随机选取一些航班进行破坏</li>
+<li>随机机位破坏：随机选取一些机位，对机位下的航班进行破坏</li>
+<li>随机时间破坏：随机选取一个时间段，对这个时间段上的航班进行破坏<br>这三种破坏方式，在破坏相同比例航班的基础上，各自的效果各不相同，我们从重建速度，收敛性两个方面进行比较发现：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">type</th>
+<th style="text-align:center">重建速度</th>
+<th style="text-align:center">收敛</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">航班破坏</td>
+<td style="text-align:center">快</td>
+<td style="text-align:center">中</td>
+</tr>
+<tr>
+<td style="text-align:center">机位破坏</td>
+<td style="text-align:center">中</td>
+<td style="text-align:center">快</td>
+</tr>
+<tr>
+<td style="text-align:center">时间破坏</td>
+<td style="text-align:center">慢</td>
+<td style="text-align:center">慢</td>
+</tr>
+</tbody>
+</table>
+<p>在实际使用中，我们主要会采取航班破坏和机位破坏，我们最后的程序中，可以根据自己的实际情况，制定不同的破坏与重建策略。</p>
+<h2 id="算法效果研究"><a href="#算法效果研究" class="headerlink" title="算法效果研究"></a>算法效果研究</h2><p>我们使用机位破坏，每次破坏1/15的机位，迭代了10000次，运行了6个小时，每次大约2.2秒，最后结果到了14.38，下面是运行结果图：</p>
+<p><div align="center"><img src="/images/airport/1.png" width="50%"><br>可以看到前期收敛是非常快的，迭代500次，就到达了14.3，大约用时20分钟。不过后面的收敛就非常的缓慢了。<br>    当加大破坏比例后，其收敛能够加快，这里没有数据了，这是我们多次实践的经验结果，具体的详细研究还需要很多的时间。<br>    在对算法的各种性质进行深入实验研究后，可以根据各种不同破坏方式下破坏不同比例的性质的不同，制定最优策略，以达到更快的得到更好的解的目的，目前的策略只是一个感性的策略，根据的是经验。</div></p>
+<h2 id="最优结果说明"><a href="#最优结果说明" class="headerlink" title="最优结果说明"></a>最优结果说明</h2><p>目前的最优解可以说是我们在进行实验过程中得到的解，我们曾经想到的各种优化方案，都曾经应用到了产生这个解的过程中。还有我们在优化的过程中也是断断续续的跑的，白天要上班或上课，电脑不能跑，到晚上才能跑，所以具体目前得到这个解跑了多久，我们也是不清楚的。<br>    现在要复现这个解也是可以复现，按照现在的算法，只要设置对相应的破坏与重建策略，肯定可以到达现在的解，只是时间问题，因为越到后面收敛是越来越慢的，其实到14.399我们只花了一个晚上了时间，但是到现在的14.4008花了好多个晚上。</p>
+<h2 id="比赛总结"><a href="#比赛总结" class="headerlink" title="比赛总结"></a>比赛总结</h2><p>在比赛的过程中也不是一帆风顺的，前期的工作也尝试过各种不同的方法：</p>
+<ul>
+<li>数据规模增大，尝试过对航班分块处理提高算法的效率； </li>
+<li>采用对时间的滑窗来对跑线性规划，得到14.25； </li>
+<li>用禁忌搜索来优化解，得到14.27；</li>
+</ul>
+<p>正是比赛中对各种方法的尝试逐渐增加了对问题、模型的理解，最终得到了一个线性规划与破坏重建结合的算法。比赛收获良多，我们也享受比赛过程中不断进步的喜悦。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/停机位/" rel="tag"># 停机位</a>
+          
+            <a href="/tags/线性规划/" rel="tag"># 线性规划</a>
+          
+            <a href="/tags/破坏与重建/" rel="tag"># 破坏与重建</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/20/论文阅读报告-DCM-BANDITS-LEARNING-TO-RANK-WITH-MULTIPLE-CLICKS/" rel="next" title="论文阅读报告 DCM BANDITS: LEARNING TO RANK WITH MULTIPLE CLICKS">
+                <i class="fa fa-chevron-left"></i> 论文阅读报告 DCM BANDITS: LEARNING TO RANK WITH MULTIPLE CLICKS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/21/腾讯社交广告高校算法大赛心得/" rel="prev" title="腾讯社交广告高校算法大赛心得">
+                腾讯社交广告高校算法大赛心得 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">布笠</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成绩"><span class="nav-number">2.</span> <span class="nav-text">成绩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总体思路"><span class="nav-number">3.</span> <span class="nav-text">总体思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贪心算法"><span class="nav-number">4.</span> <span class="nav-text">贪心算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#破坏与重建算法"><span class="nav-number">5.</span> <span class="nav-text">破坏与重建算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性规划模型"><span class="nav-number">6.</span> <span class="nav-text">线性规划模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">6.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目标函数"><span class="nav-number">6.2.</span> <span class="nav-text">目标函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#约束条件"><span class="nav-number">6.3.</span> <span class="nav-text">约束条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型优化"><span class="nav-number">6.4.</span> <span class="nav-text">模型优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#破坏方式"><span class="nav-number">7.</span> <span class="nav-text">破坏方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法效果研究"><span class="nav-number">8.</span> <span class="nav-text">算法效果研究</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最优结果说明"><span class="nav-number">9.</span> <span class="nav-text">最优结果说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比赛总结"><span class="nav-number">10.</span> <span class="nav-text">比赛总结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">布笠</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'BdmqkuIswxycpuqmcQD8CyCg-gzGzoHsz',
+    appKey: 'Cus3Bff7PDHJqn8JmQEoiDQ2',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

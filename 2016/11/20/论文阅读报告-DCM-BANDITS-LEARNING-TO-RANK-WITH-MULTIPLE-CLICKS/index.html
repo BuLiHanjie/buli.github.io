@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="摘要　　当用户在搜索引擎上查询感兴趣的条目时，通常得到一个包含相关网页链接的列表。用户从第一个网页链接开始，浏览所有的感兴趣的链接并点击，直至得到想要的结果或者是最后一个链接为止。这种用户浏览行为称为dependent click model（DCM）。论文通过最大化推荐的网页链接推荐满意度，向用户推荐最合适的网页链接。在此报告中，先介绍与论文相关的多臂赌博机问题（multi-armed band">
+<meta name="keywords" content="多臂赌博机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读报告 DCM BANDITS: LEARNING TO RANK WITH MULTIPLE CLICKS">
+<meta property="og:url" content="http://yoursite.com/2016/11/20/论文阅读报告-DCM-BANDITS-LEARNING-TO-RANK-WITH-MULTIPLE-CLICKS/index.html">
+<meta property="og:site_name" content="布笠Blog">
+<meta property="og:description" content="摘要　　当用户在搜索引擎上查询感兴趣的条目时，通常得到一个包含相关网页链接的列表。用户从第一个网页链接开始，浏览所有的感兴趣的链接并点击，直至得到想要的结果或者是最后一个链接为止。这种用户浏览行为称为dependent click model（DCM）。论文通过最大化推荐的网页链接推荐满意度，向用户推荐最合适的网页链接。在此报告中，先介绍与论文相关的多臂赌博机问题（multi-armed band">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/dcm%20bandits/20161120163151691.png">
+<meta property="og:image" content="http://yoursite.com/images/dcm%20bandits/20161120180057557.png">
+<meta property="og:image" content="http://yoursite.com/images/dcm%20bandits/20161120180956393.png">
+<meta property="og:image" content="http://yoursite.com/images/dcm%20bandits/20161120183049863.png">
+<meta property="og:image" content="http://yoursite.com/images/dcm%20bandits/20161120183625683.png">
+<meta property="og:image" content="http://yoursite.com/images/dcm%20bandits/Snipaste_2019-01-17_00-12-16.png">
+<meta property="og:image" content="http://yoursite.com/images/dcm%20bandits/20161128011651741.png">
+<meta property="og:updated_time" content="2019-01-16T16:40:49.596Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="论文阅读报告 DCM BANDITS: LEARNING TO RANK WITH MULTIPLE CLICKS">
+<meta name="twitter:description" content="摘要　　当用户在搜索引擎上查询感兴趣的条目时，通常得到一个包含相关网页链接的列表。用户从第一个网页链接开始，浏览所有的感兴趣的链接并点击，直至得到想要的结果或者是最后一个链接为止。这种用户浏览行为称为dependent click model（DCM）。论文通过最大化推荐的网页链接推荐满意度，向用户推荐最合适的网页链接。在此报告中，先介绍与论文相关的多臂赌博机问题（multi-armed band">
+<meta name="twitter:image" content="http://yoursite.com/images/dcm%20bandits/20161120163151691.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/20/论文阅读报告-DCM-BANDITS-LEARNING-TO-RANK-WITH-MULTIPLE-CLICKS/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>论文阅读报告 DCM BANDITS: LEARNING TO RANK WITH MULTIPLE CLICKS | 布笠Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">布笠Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/20/论文阅读报告-DCM-BANDITS-LEARNING-TO-RANK-WITH-MULTIPLE-CLICKS/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="布笠">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="布笠Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">论文阅读报告 DCM BANDITS: LEARNING TO RANK WITH MULTIPLE CLICKS
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-11-20 16:24:34" itemprop="dateCreated datePublished" datetime="2016-11-20T16:24:34+08:00">2016-11-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-17 00:40:49" itemprop="dateModified" datetime="2019-01-17T00:40:49+08:00">2019-01-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/报告/" itemprop="url" rel="index"><span itemprop="name">报告</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <a href="/2016/11/20/论文阅读报告-DCM-BANDITS-LEARNING-TO-RANK-WITH-MULTIPLE-CLICKS/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2016/11/20/论文阅读报告-DCM-BANDITS-LEARNING-TO-RANK-WITH-MULTIPLE-CLICKS/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>　　当用户在搜索引擎上查询感兴趣的条目时，通常得到一个包含相关网页链接的列表。用户从第一个网页链接开始，浏览所有的感兴趣的链接并点击，直至得到想要的结果或者是最后一个链接为止。这种用户浏览行为称为dependent click model（DCM）。论文通过最大化推荐的网页链接推荐满意度，向用户推荐最合适的网页链接。在此报告中，先介绍与论文相关的多臂赌博机问题（multi-armed bandit problem）。然后介绍论文作者在2015年发表的相关论文《Cascading Bandits: Learning to Ranking the Cascade Model》，论文与DCM是类似的。最后是DCM的介绍。<br><a id="more"></a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/21388070" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/21388070</a>  专治选择困难症——bandit算法</li>
+<li><a href="http://banditalgs.com/2016/09/18/the-upper-confidence-bound-algorithm/" target="_blank" rel="noopener">http://banditalgs.com/2016/09/18/the-upper-confidence-bound-algorithm/</a> The Upper Confidence Bound Algorithm</li>
+<li>Kveton B, Szepesvari C, Wen Z, et al. Cascading Bandits: Learning to Rank in the Cascade Model[C]// ICML. 2015:767-776.</li>
+<li>Katariya S, Kveton B, Szepesvári C, et al. DCM Bandits: Learning to Rank with Multiple Clicks[J]. 2016.</li>
+</ul>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>　　搜素引擎通常把推荐的网页链接进行排序，按照相关度来进行排序，最相关的网页放在最前面方便用户浏览。在推荐中往往会考虑用户点击的数据，比如cascade mode（Craswell et al., 2008）是网页搜索中最流行的用户行为模型之一。在2015年，本论文的作者曾提出在线的遗憾优化学习算法（regret-optimal online learning algorithms），此级联模型的主要限制在于不能学习多次点击的行为。<br>　　在论文中作者提出一个在线学习的算法DCM来学习用户多次点击的问题。在每一个时刻t，推荐给用户一个包含K个网页链接的列表，用户从最开始的链接浏览至最后一个链接，当用户找到感兴趣的链接时会点击链接并且浏览网页，然后可能会离开搜索的界面或者继续浏览下一个链接。当用户离开搜索的界面时，DCM会判断用户是否已经得到其想要的信息：如果用户得到想要的结果离开搜索界面，DCM会得到奖励1；如果用户浏览所有的链接并得不到满意的结果，DCM得到奖励0。DCM的目标在于最大化总的奖励，或者说最小化累积遗憾（推荐的K个网页链接和最优的推荐结果间的差异累积）。本论文中的一个挑战是用户是否得到满意结果是未知的。<br>　　在此阅读报告中，着重介绍论文的思想和做法，对于公式的推导过程不做详细的介绍。</p>
+<h2 id="多臂赌博机"><a href="#多臂赌博机" class="headerlink" title="多臂赌博机"></a>多臂赌博机</h2><p>　　多臂赌博机问题（multi-armed bandit problem），与平常生活中遇到各式各样的选择问题是息息相关的。比如：去哪里上大学、选择什么专业、中午吃什么等。为此解决这问题需要进行有策略的进行选择，而这就是bandit算法。其解决的问题如下：<br>　　一个赌徒，要去摇老虎机，走进赌场一看，一排老虎机，外表一模一样，但是每个老虎机吐钱的概率可不一样，他不知道每个老虎机吐钱的概率分布是什么，那么想最大化收益该怎么整？这就是多臂赌博机问题。怎么解决这个问题呢？最好的办法是去试一试，而这个试一试也不是盲目地试，而是有策略地试，越快越好，这些策略就是bandit算法。</p>
+<p><div align="center"><img src="/images/dcm bandits/20161120163151691.png" width="25%"><br>多臂赌博机问题和很多问题之间是有联系的：1. 假设一个用户对不同类别的内容感兴趣程度不同，那么我们的推荐系统初次见到这个用户时，怎么快速地知道他对每类内容的感兴趣程度？这就是推荐系统的冷启动；2. 假设我们有若干广告库存，怎么知道该给每个用户展示哪个广告，从而获得最大的点击收益？是每次都挑效果最好那个么？那么新广告如何才有出头之日？ 3. 我们的算法工程师又想出了新的模型，有没有比A/B test更快的方法知道它和旧模型相比谁更靠谱？以下本文主要介绍解决此问题的UCB算法。</div></p>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>　　假设有K个老虎机排列在面前，每一次我们可以选择一个老虎机来按并且获得奖励。但老虎机的选择有两个问题：是应该选择过去回报率高的老虎机，还是选择过去回报率较低但是有潜力的老虎机呢？对此，我们可以假设K个老虎机的奖励独立服从一个概率分布，记录每一轮中老虎机的奖励信息，根据历史信息选择奖励最高的老虎机。在多臂赌博机中，把老虎机称之为臂。
+　　</p>
+<h3 id="UCB算法"><a href="#UCB算法" class="headerlink" title="UCB算法"></a>UCB算法</h3><p>　　这个算法被认为是乐观面对不确定性：首先每一轮猜测各个臂可能给出的奖励，然后选择奖励最高的臂，如果实际获得的奖励少则减少臂的奖励估计，减少对臂的选择；否则提高臂的奖励估计，增加对臂的选择。里面对臂的奖励估计，则是建立一个指数，通过动态的调整指数参数来对臂的奖励估计。<br>　　所以需要一个定义策略好坏的指标——累积遗憾：一个策略A和一个动作集{K}，在T时间后的累积遗憾是策略A的期望奖励和最佳臂的期望奖励之差。<br>　　定义策略的奖励为$f(A)$，则最优臂为$A^{\ast}=arg \max \limits_{A\in{K}}⁡f(A)$，所以策略A的累积遗憾$R_T(A)=f_T(A^{*})-f_T(A)$，表示该策略与收益期望最大的臂之间的收益差异。所以一个好的策略应该是最小化：<br>$$R(n)=E\left[\sum_{i=1}^n\left[R_t (A_t)\right]\right ]$$</p>
+<p><strong>定理</strong>：假设$X_1，X_2，…，X_n$相互独立且服从1-次高斯分布（方差为1、均值为0），$u ̂=\sum_{t=1}^n X_t/n$，可以得到$P(u ̂≥ε)≤exp⁡(-\frac{nε^2}{2})$。<br>　　可以写作：$P(u ̂≥\sqrt{\frac{2}{n} log⁡(\frac{1}{δ}))}≤δ$。<br>　　所以，对于某个老虎机的估计，可能的形式为：$\hat{u}_i (t-1)+\sqrt{\frac{2}{T_i (t-1)} log⁡(\frac{1}{δ})}$。<br>　　δ的选择不同产生不同的算法，当δ越小，策略的选择越乐观（因为指数变得更大）。<br><strong>UCB算法的具体算法如下</strong>：取δ=1/t，t是试验的总次数</p>
+<blockquote>
+<ol>
+<li>对每个臂先试一次观察收益情况； </li>
+<li>以后每次选择指数最大的臂$\hat{u}_i (t-1)+\sqrt{2/(T_i (t-1)) log⁡(t)}$。</li>
+</ol>
+</blockquote>
+<p>　　UCB算法的累积期望遗憾是$O(logN)$，最坏情况下累积遗憾不超过$O(\sqrt{KNlogN})$。</p>
+<h2 id="Cascading-Bandits-Learning-to-Ranking-the-Cascade-Model"><a href="#Cascading-Bandits-Learning-to-Ranking-the-Cascade-Model" class="headerlink" title="Cascading Bandits: Learning to Ranking the Cascade Model"></a>Cascading Bandits: Learning to Ranking the Cascade Model</h2><p>　　此论文是阅读论文的作者2015年写的，相当于是一个简化版本。<br>　　对于用户搜索的条目，搜索引擎返回推荐的K个网页链接，通常K个网页链接是按照相关性进行排序的。用户通常从第一个网页链接浏览到最后一个链接，然后选择最感兴趣的链接进行点击浏览。基于这种用户行为，论文中为了解决搜索引擎中的推荐问题，提出了两个模型：CascadeUCB1和CascadeKL-UCB。两个模型的差异在于置信上限的计算不同。<br>　　而且论文中的设定的用户行为模式与现实具有差异的，所以模型不能解决多次点击的行为。</p>
+<h3 id="用户行为模式"><a href="#用户行为模式" class="headerlink" title="用户行为模式"></a>用户行为模式</h3><p>　　用户的行为模式如下图所示：<br>　　<div align="center"><img src="/images/dcm bandits/20161120180057557.png" width="50%">
+　</div></p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>　　假设总共有n个网页链接，每次向用户推荐K个链接。在第t步得到的奖励认为是推荐的K个网页至少有一个被点击的概率：<br>$$f(A,w)=1-\prod_{k=1}^K(1-w(a_k ))$$<br>　　其中$A=(a_1,…,a_K)$和$w∈[0,1]^E$。<br>　　所以累积遗憾函数的计算为$R(A_t,w_t )=f(A^{\ast},w_t )-f(A_t,w_t)$，$A^{\ast}=arg\max \limits_{A∈∏_K(E)}⁡f(A,\overline w)$为理想的网页。<br>　　具体的算法步骤如图所示，思想是和多臂赌博机的类似的：<br>　　<div align="center"><img src="/images/dcm bandits/20161120180956393.png" width="50%">
+　　</div></p>
+<blockquote>
+<ol>
+<li>$w_0\sim P$： $w_t (e)∈{0,1}$表示用户在时间t对链接e的偏好程度。这个偏好是随机的并且服从伯努利分布（用户感兴趣的链接均值为$p$，不感兴趣的链接均值为$p-\Delta$）；</li>
+<li>$∀e∈E:T_0 (e)←1$：相当于每个链接首先推荐一遍并被浏览；</li>
+<li>$∀e∈E:w ̂_1 (e)←1$：每个链接预设浏览了一次并被点击；</li>
+<li>Compute UCBs：计算每个链接的置信上限；</li>
+<li>$A_t←(a_1^t……a_K^t)$：选取置信上限最大的K个网页链接进行推荐；</li>
+<li>$C_t∈{1,…,K,∞}$：表示用户浏览的终止位置，当C_t≤K表示用户找到感兴趣的链接，当C_t=∞表示用户浏览了所有的链接没有找到感兴趣的；</li>
+<li>$T_t (e)←T_{t-1} (e)+1$：表示链接被浏览的次数加一；</li>
+<li>$w ̂_{T_t (e) } (e)←⋯$：更新浏览过的链接被点击的次数。</li>
+</ol>
+</blockquote>
+<p>　　与原先的多臂赌博机问题相比，可以看出计算过程是相似的。每一次像用户推荐K个链接，用户浏览了前$C_t≤K$个链接，并且点击了第$C_t$个链接。可以把每个链接看做是一个赌博机，按照置信上限从大到小向用户逐个推荐链接，并且得到一个收益（用户满不满意），而${C_t+1,…,K}$的链接没有进行试验。由此看来，与原先多臂赌博机问题的差异在于UCBs的计算。<br>　　CascadeUCB1算法中：$U_t (e)=\hat{w}_{T_{t-1}(e) ) } (e)+\sqrt{\frac{1.5}{T_{t-1}(e) }  log⁡(t-1)}$，与多臂赌博机相比只是系数上的差异；CascadeKL-UCB算法中：$U_t (e)=\max⁡\left\{q\in\left[\hat{w}_{T_{t-1}(e)}  (e),1\right]:T_{t-1} (e) D_{KL} \left(\hat{w}_{T_{t-1}(e) }  \left(e\right)||q\right)\leq logt+3loglogt\right\}$，其中$D_{KL}(p||q)$是两个服从均值为p和q的伯努利分布变量的KL散度，这里是找一个最大的置信上限满足和观测的均值差异在一个区间内。
+　</p>
+<h2 id="DCM-Bandits-Learning-to-Rank-with-Multiple-Clicks"><a href="#DCM-Bandits-Learning-to-Rank-with-Multiple-Clicks" class="headerlink" title="DCM Bandits: Learning to Rank with Multiple Clicks"></a>DCM Bandits: Learning to Rank with Multiple Clicks</h2><p>　　上篇论文中，用户的行为假定只点击一个最吸引他的网页。而在实际情况中，用户往往是点击多个感兴趣的页面，当浏览到需要的网页或者不存在感兴趣的网页才终止浏览的行为。论文中假设每个网页对用户的吸引概率是独立的，并且用户在浏览网页后有个终止的概率表示获取到需要的网页。用户依次浏览推荐的K个网页，用户会点击吸引他的网页，当用户点击网页浏览后如果获取到需要的信息则终止浏览，否则继续浏览下一个网页。为此论文中提出了dcmKL-UCB模型。</p>
+<h3 id="用户行为模式-1"><a href="#用户行为模式-1" class="headerlink" title="用户行为模式"></a>用户行为模式</h3><p>　　与上一个模型相比，用户会点击多个链接，并且在每一个链接中有一定的概率离开。<br>　　用户行为模式如下图所示：<br>　　<div align="center"><img src="/images/dcm bandits/20161120183049863.png" width="50%"></div></p>
+<h3 id="算法-1"><a href="#算法-1" class="headerlink" title="算法"></a>算法</h3><p>　　论文中新增添一个只和位置k相关的终止概率，表示当用户在浏览第k个链接后终止继续浏览的概率。当存在一个网页链接是吸引用户的，可以看作收益为1，即$w(e)=1$且$v(k)=1$。所以在第t步得到的奖励认为是推荐的K个网页至少有一个满足用户的需求的概率<br>$$<br>f(A,w,v)=1-\prod_{k=1}^K\left(1-v(k)w(a_k )\right)<br>$$</p>
+<p><div align="center"><img src="/images/dcm bandits/20161120183625683.png" width="50%"></div></p>
+<p><div align="center"><img src="/images/dcm bandits/Snipaste_2019-01-17_00-12-16.png" width="80%"></div></p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>算法中预设参数：</p>
+<ol>
+<li>总网页链接数L；     </li>
+<li>用户感兴趣的网页链接数K，假设编号为0——K-1；</li>
+<li>用户感兴趣的网页，吸引概率p=0.2；</li>
+<li>用户不感兴趣的网页与感兴趣的网页之间的吸引用户概率的gap为∆，所以不感兴趣的网页吸引用户的概率为p-∆；</li>
+<li>每个位置的终止概率为γ=0.8。</li>
+<li>总的迭代次数n=10^5；</li>
+</ol>
+<p>每组实验做20次，取均值作为实验结果。</p>
+<p><div align="center"><img src="/images/dcm bandits/20161128011651741.png" width="50%"><br>实验结果可以得出：</div></p>
+<ul>
+<li>期望累积遗憾随着K的增大而减少；</li>
+<li>期望累积遗憾随着L的增大而变大；</li>
+<li>期望累积遗憾随着∆的减少而变大。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多臂赌博机/" rel="tag"># 多臂赌博机</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/27/菜鸟-需求预测与分仓规划/" rel="next" title="菜鸟-需求预测与分仓规划">
+                <i class="fa fa-chevron-left"></i> 菜鸟-需求预测与分仓规划
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/01/机场停机位资源分配优化/" rel="prev" title="机场停机位资源分配优化">
+                机场停机位资源分配优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">布笠</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">3.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多臂赌博机"><span class="nav-number">4.</span> <span class="nav-text">多臂赌博机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">4.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UCB算法"><span class="nav-number">4.2.</span> <span class="nav-text">UCB算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cascading-Bandits-Learning-to-Ranking-the-Cascade-Model"><span class="nav-number">5.</span> <span class="nav-text">Cascading Bandits: Learning to Ranking the Cascade Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户行为模式"><span class="nav-number">5.1.</span> <span class="nav-text">用户行为模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">5.2.</span> <span class="nav-text">算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DCM-Bandits-Learning-to-Rank-with-Multiple-Clicks"><span class="nav-number">6.</span> <span class="nav-text">DCM Bandits: Learning to Rank with Multiple Clicks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户行为模式-1"><span class="nav-number">6.1.</span> <span class="nav-text">用户行为模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法-1"><span class="nav-number">6.2.</span> <span class="nav-text">算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验"><span class="nav-number">7.</span> <span class="nav-text">实验</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">布笠</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'BdmqkuIswxycpuqmcQD8CyCg-gzGzoHsz',
+    appKey: 'Cus3Bff7PDHJqn8JmQEoiDQ2',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

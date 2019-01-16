@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题目描述https://tianchi.shuju.aliyun.com/competition/information.htm?spm=5176.100067.5678.2.nXeJox&amp;amp;raceId=231581最后一公里极速配送大赛主要针对赛题背景中提到的电商包裹和同城O2O包裹提供最优的快递员配送方案，快递员需要在指定时间去商户提取并在指定时间内配送至消费者。">
+<meta name="keywords" content="最后一公里,o2o,费用流,动态规划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最后一公里极速配送">
+<meta property="og:url" content="http://yoursite.com/2016/09/22/最后一公里极速配送/index.html">
+<meta property="og:site_name" content="布笠Blog">
+<meta property="og:description" content="题目描述https://tianchi.shuju.aliyun.com/competition/information.htm?spm=5176.100067.5678.2.nXeJox&amp;amp;raceId=231581最后一公里极速配送大赛主要针对赛题背景中提到的电商包裹和同城O2O包裹提供最优的快递员配送方案，快递员需要在指定时间去商户提取并在指定时间内配送至消费者。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/one-km/summary.png">
+<meta property="og:image" content="http://yoursite.com/images/one-km/flow.png">
+<meta property="og:updated_time" content="2019-01-16T16:34:52.334Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="最后一公里极速配送">
+<meta name="twitter:description" content="题目描述https://tianchi.shuju.aliyun.com/competition/information.htm?spm=5176.100067.5678.2.nXeJox&amp;amp;raceId=231581最后一公里极速配送大赛主要针对赛题背景中提到的电商包裹和同城O2O包裹提供最优的快递员配送方案，快递员需要在指定时间去商户提取并在指定时间内配送至消费者。">
+<meta name="twitter:image" content="http://yoursite.com/images/one-km/summary.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/22/最后一公里极速配送/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>最后一公里极速配送 | 布笠Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">布笠Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/22/最后一公里极速配送/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="布笠">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="布笠Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">最后一公里极速配送
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-09-22 20:04:38" itemprop="dateCreated datePublished" datetime="2016-09-22T20:04:38+08:00">2016-09-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-17 00:34:52" itemprop="dateModified" datetime="2019-01-17T00:34:52+08:00">2019-01-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/竞赛/" itemprop="url" rel="index"><span itemprop="name">竞赛</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <a href="/2016/09/22/最后一公里极速配送/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2016/09/22/最后一公里极速配送/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><a href="https://tianchi.shuju.aliyun.com/competition/information.htm?spm=5176.100067.5678.2.nXeJox&amp;raceId=231581" target="_blank" rel="noopener">https://tianchi.shuju.aliyun.com/competition/information.htm?spm=5176.100067.5678.2.nXeJox&amp;raceId=231581</a><br>最后一公里极速配送大赛主要针对赛题背景中提到的电商包裹和同城O2O包裹提供最优的快递员配送方案，快递员需要在指定时间去商户提取并在指定时间内配送至消费者。<br><a id="more"></a></p>
+<h2 id="成绩"><a href="#成绩" class="headerlink" title="成绩"></a>成绩</h2><p>第一赛季：第一名<br>第二赛季：第五名（前三名使用了作弊…）</p>
+<h2 id="总纲"><a href="#总纲" class="headerlink" title="总纲"></a>总纲</h2><p>题目中有两种包裹，分别是电商包裹和O2O包裹：</p>
+<ol>
+<li>电商包裹：数量多，包裹数目大，路程较近，由124个网点配送；</li>
+<li>O2O包裹：数量较少，包裹数目小，路程较远，有时间窗口。</li>
+</ol>
+<p>由于两种包裹的特性差异较大，如果对所有包裹一起考虑，很难得到一个满意的策略来对问题全局优化。所以在本方案中，两种包裹进行分开考虑，再对每种包裹的方案进行合并。总的方案流程图如下：<br>　　<div align="center"><img src="/images/one-km/summary.png" width="75%"></div></p>
+<h2 id="O2O包裹之费用流"><a href="#O2O包裹之费用流" class="headerlink" title="O2O包裹之费用流"></a>O2O包裹之费用流</h2><p>在问题中，O2O包裹有配送时间和送达时间的限制，为了简化问题，使得问题更容易求解，有以下假设：</p>
+<ol>
+<li>快递员在商家取一个O2O包裹后，下一个动作必定是把包裹送达用户手中。即快递员身上不同时存在两个O2O包裹；</li>
+<li>快递员抵达商家的时间，不大于商家要求的取件的时间或超过的时间有个上限值。</li>
+</ol>
+<p>基于假设，可以认为快递员在商家要求的区间时间收取O2O包裹，并且立即运送到相应的用户，与原问题相比少了时间窗口限制和容量的限制，容易得到的数学模型表达如下：</p>
+<p>设n是O2O包裹数量，m是配送的快递员数量， 表示第i个O2O包裹， 表示第i个O2O包裹的取件时间。<br>相关二进制变量如下：<br>$$g_{ij}=\begin{cases}1&amp; 派送包裹i后派送包裹j\\0&amp; 其它情况\end{cases}$$</p>
+<p>最小化目标函数：<br>$$\mathop {\min }f=\sum_{i=0}^n\sum_{j=0}^ng_{ij}*cost(x_i,x_j)+\sum_{i=0}^nhandle(x_i)$$</p>
+<p>s.t.<br>$$\left|\left\{j \left.\right| \sum_{i=0}^ng_{ij}=0 \right\}\right|=m$$<br>$$\sum_{j=0}^ng_{ij}\leq1\ and\ g_{ij}=0\ i\in[0,n)$$</p>
+<p>$cost$是根据题目计算的两个O2O包裹间路程的耗时，$handle$是配送O2O包裹的耗时，容易得出公式的第二项是一个常数。</p>
+<p>对于问题的求解，容易得出一个费用流的求解方法，有两个参数分别是派送的快递员数量$m$和时间差$tl$：</p>
+<ol>
+<li>图中有一个起始顶点$S$和终止顶点$T$；</li>
+<li>图中有一个顶点$A$，限制派送包裹的快递员数量，起始点$S$与顶点$A$中有一条容量为m费用为0的弧；</li>
+<li>每个包裹对应有两个顶点$B_i$和$C_i$，顶点$B_i$和$C_i$之间有一条容量为1费用为$10000-handle(x_i)$的弧，用来保证每个包裹只被派送一次，而费用加上一个很大的常数10000是为了保证每个包裹都被派送，每个包裹都加上相同的常数并不影响最小化目标函数的求解，$handle(x_i)$是派送包裹的耗时；</li>
+<li>当包裹$i$的取件时间不大于的送达时间$tl$（送达时间是指在取件时间开始派送包裹$j$，送到用户的时间），$C_i$和$B_i$之间有一条容量为1费用为从包裹i用户赶往包裹$j$商户的路上耗时。参数tl是为了有效的减少图的规模，并且在图中每个包裹只考虑了上一个包裹是从取件时间开始派送的，忽略了超时的可能性，适当的允许超时在$tl$范围内能够取得更好的结果。</li>
+<li>顶点$C_i$和终止顶点$T$之间有一条容量为1费用为0的弧。</li>
+</ol>
+<p>最后通过最大费用流的求解即可获得O2O包裹的配送方案，具体的示意图如图所示：</p>
+<p><div align="center"><img src="/images/one-km/flow.png" width="75%"></div></p>
+<h2 id="O2O包裹之动态规划合并"><a href="#O2O包裹之动态规划合并" class="headerlink" title="O2O包裹之动态规划合并"></a>O2O包裹之动态规划合并</h2><p>通过费用流得出的O2O包裹配送方案，耗时较大，主要有以下原因：</p>
+<ol>
+<li>O2O的包裹较小，且路程较远，费用流的方法不能有效的利用快递员的运载量；</li>
+<li>O2O包裹的配送时限为90分钟，不需要立即送达，可以顺路配送相关的包裹。</li>
+</ol>
+<p>所以，需要一种方案来尽量的合并O2O包裹减少耗时。</p>
+<p>　　假设派送O2O包裹可以用序列$a_1,a_2,……,a_r$来表示，例如:派送一个O2O包裹E0000可以表示为E0000:1,E0000:-1，其中1代表取货，-1代表送达，序列表示取包裹E0000然后配送；派送包裹E0000和E0001的可能序列为E0000:1,E0001:1,E0000:-1,E0001:-1，序列表示取E0000包裹，然后取E0001包裹，依次配送E0000和E0001包裹。<br>　　当存在配送序列$a_1,a_2,…,a_r$和配送序列$b_1,b_2,…,b_t$，最少耗时的配送序列$c_1,c_2,…,c_{r+t}$可以通过动态规划进行求解：<br>　　假设序列$a_i$和$b_i$在最优配送序列ci中，每个O2O包裹的配送顺序与原序列$a_i$和$b_i$相同，虽然此假设并不严谨但在大多数情况下是符合的，基于此假设能够得到动态规划快速求解的方法。<br>　　设$f_{i,j,k}$为序列$a_1,a_2,…,a_i$和序列$b_1,b_2,…,b_j$合并为$c_1,c_2,…,c_{i+j}$的最少耗时，其中i≤r，j≤t，k=0或1代表最后一个动作$c_{i+j}$为$a_i$或$b_j$。</p>
+<p>$$ \mathop {\min }f_{i,j,k}=\mathop {\min }\begin{cases}<br>min(f_{i-1,j,0}+cost(a_{i-1},a_i),f_{i-1,j,1}+cost(a_j,a_i))&amp; k=0\ and\ i\neq0\\<br>min(f_{i,j-1,0}+cost(a_i,a_j),f_{i,j-1,1}+cost(a_{j-1},a_j))&amp; k=1\ and\ j\neq0\\<br>cost(b_0,…,b_j)+cost(b_j,a_0)&amp; k=0\ and\ i=0\\<br>cost(a_0,…,a_i)+cost(a_i,b_0)&amp; k=1\ and\ j=0<br>\end{cases} $$</p>
+<p>计算过程中$f_{i,j,k}$需要判断序列的包裹合法和相应的路程时间。<br>由此可以得到一个有效的贪心策略：</p>
+<ol>
+<li>假设参数$t$；</li>
+<li>选取两个包裹a和b，计算$cost(a^b)-cost(a)-cost(b)$，选取$cost$增加最少且增加的$cost&lt;t$的两个包裹进行合并为新的包裹；</li>
+<li>当任意两个包裹合并增加的$cost&gt;t$结束，否则从步骤2开始进行。<br>此策略能够有效的合并O2O包裹，提交的方案中选取15，O2O包裹最终的数量&lt;1000。<br>最后通过费用流的方法进行最后的包裹配送规划。</li>
+</ol>
+<h2 id="电商包裹之初始化"><a href="#电商包裹之初始化" class="headerlink" title="电商包裹之初始化"></a>电商包裹之初始化</h2><p>　　问题中，电商包裹又124个网点进行配送，且124个网点配送的范围并不重叠。所以不同网点的电商包裹分开考虑，同时也为了减少时间的复杂度。<br>　　对于不同网点的包裹配送方案初始化如下:<br>　　假设所有的电商包裹都是单独配送并且返回网点。选取任意两个电商包裹一起配送，时间消耗减少了网点分别配送两个包裹的路程耗时，时间消耗增加了两个包裹配送点之间的路程耗时。选取减少消耗最多且满足快递员容量限制的两个包裹一起配送。直至没有包裹可以一起配送为止。</p>
+<h2 id="电商包裹之遗传算法"><a href="#电商包裹之遗传算法" class="headerlink" title="电商包裹之遗传算法"></a>电商包裹之遗传算法</h2><p>　　通过遗传算法能够一定程度上减少电商包裹的耗时，但相对于整个算法并不那么重要。遗传算法中加入初始化的结果作为某一条基因组，是为了结果能够更快的收敛。<br>　　编码方式：长度为n的编码，每一位记录下一个运送的电商包裹的编号，-1记录返回网点；<br>　　适应度函数：cost(电商包裹)；<br>　　选择函数：1/适应度；<br>　　基因交叉：选择两条基因组，随机选择基因第i位交叉。由于要满足每个电商包裹只能配送一次，基因组中可能存在第j位与第i位是同样的数值，继续在第j位进行交叉，直至基因组合法为止；<br>　　基因突变：随机选取某一位设为-1。</p>
+<h2 id="电商包裹之局部搜索"><a href="#电商包裹之局部搜索" class="headerlink" title="电商包裹之局部搜索"></a>电商包裹之局部搜索</h2><p>　　通过局部搜索的方法，相比遗传算法能更快更好的减少电商包裹的耗时，但是在电商包裹和O2O包裹合并的过程中没有得到一个很好的结果。所以最终是采用遗传算法。<br>　　所有的包裹按照初始化，可以按照配送的顺序排成一行 ，相应的最小耗时可以用动态规划来计算。枚举$i,j$，把$a_i$插入到序列的第$j$位，计算相应的耗时。选取最小耗时的序列保存下来，重复插入的操作直至耗时不能减少为止。<br>　　序列$a_i$的最小耗时计算如下：<br>　　设$f_i$记录$cost(a_1,a_2,…,a_i)$的最小耗时，状态转移如下：$f_i=min{f_j+cost(a_j,a_{j+1},…,a_i)|j&lt;i,\sum_{k=i}^jpac_k\le140}$，即枚举第$j$到$i$的电商包裹作为连续配送的一个子序列。</p>
+<h2 id="背包合并"><a href="#背包合并" class="headerlink" title="背包合并"></a>背包合并</h2><p>　　当O2O包裹合并以后，依然会有取货时间前的一段时间可以配送电商包裹，电商包裹经过合并之后得到了多个包裹的配送序列。所以主要是在配送O2O包裹前选择适合的电商包裹序列配送。<br>　　假设配送O2O包裹的起始时间为$st_i$，电商包裹配送序列的耗时为$c_i$，算法的流程如下：
+　　</p>
+<ol>
+<li>枚举每个O2O包裹$y_i$，起始时间为$st_i$；</li>
+<li>枚举电商包裹配送序列$x_i$所谓配送O2O包裹前最后配送的电商包裹；</li>
+<li>剩余时间$t=st_i+cost(x_i,y_i)$，cost代表配送完电商包裹然后配送O2O包裹的路程耗时，减去配送完电商包裹返回网点的耗时；</li>
+<li>对剩余时间t进行网点与 相同的电商包裹序列填充，这里可以用01背包。但是考虑到有些快递员只配送电商包裹，所以考虑每个电商包裹序列的价值为:电商包裹序列耗时-网点到最后一个配送点的路上耗时，能够获得更好的方案。</li>
+<li>删除所有选择的电商包裹序列；</li>
+<li>重复以上步骤，直至枚举所有的O2O包裹。</li>
+<li>对剩余的O2O包裹用空闲的快递员进行配送</li>
+</ol>
+<h2 id="尝试"><a href="#尝试" class="headerlink" title="尝试"></a>尝试</h2><p>比赛中有各种尝试：</p>
+<ul>
+<li>费用流中加入预测评估使得O2O包裹的起始时间能更好的合并电商包裹</li>
+<li>O2O包裹和电商包裹在DP Merge中一起合并</li>
+</ul>
+<p>各种尝试中会增加算法的复杂度，但是提高的成绩并不明显，因此也不再描述了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　总的来说，方案中采用的是O2O包裹和电商包裹分开的计算的方法。O2O包裹合并之后能够有效的对O2O包裹进行配送。我认为本方案的优点在于：算法运行的速度快，能够很快的得出结果，思路也是比较的简单的。而方案中比较不足的在于：O2O包裹和电商包裹不能很好的进行融合，而且在单独配送电商包裹的策略中没有很好的考虑O2O包裹的取件时间。<br>    在后面经过对方案的统计分析，即使把方案中的电商包裹策略做的更加完善也不能提高很多，因此后面的工作主要着重于如何真正的把电商包裹和O2O包裹融合起来。但是考虑到时间复杂度等问题，最终没有得到一个很好的解决方案，不能不是一个遗憾。</p>
+<h2 id="答辩总结"><a href="#答辩总结" class="headerlink" title="答辩总结"></a>答辩总结</h2><p>　　比赛中第一赛季第一名，第二赛季第五名。在第二赛季中有意思的是在最后几天不断被反超了，而且分数的差距非常大，所以答辩也是抱着学习的心态去的。<br>　　但是前三名的成绩是利用了题目10次作弊的限制，而且官方的评测程序计算耗时是根据提交结果的上一个时间计算，所以快递员配送过程中10次瞬移能得到更好的结果（第一赛季没多大用，第二赛季很多超时的O2O包裹所以提升会非常大）。其实这是很不合理的，但是阿里默认这种解释，即使不爽也没办法的了。<br>　　答辩过程中也能看到些其它的方法，也有所启发吧，不过毕竟不是研究这领域的，也不打算研究下去了。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/最后一公里/" rel="tag"># 最后一公里</a>
+          
+            <a href="/tags/o2o/" rel="tag"># o2o</a>
+          
+            <a href="/tags/费用流/" rel="tag"># 费用流</a>
+          
+            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/27/菜鸟-需求预测与分仓规划/" rel="prev" title="菜鸟-需求预测与分仓规划">
+                菜鸟-需求预测与分仓规划 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">布笠</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成绩"><span class="nav-number">2.</span> <span class="nav-text">成绩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总纲"><span class="nav-number">3.</span> <span class="nav-text">总纲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O2O包裹之费用流"><span class="nav-number">4.</span> <span class="nav-text">O2O包裹之费用流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O2O包裹之动态规划合并"><span class="nav-number">5.</span> <span class="nav-text">O2O包裹之动态规划合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电商包裹之初始化"><span class="nav-number">6.</span> <span class="nav-text">电商包裹之初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电商包裹之遗传算法"><span class="nav-number">7.</span> <span class="nav-text">电商包裹之遗传算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电商包裹之局部搜索"><span class="nav-number">8.</span> <span class="nav-text">电商包裹之局部搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背包合并"><span class="nav-number">9.</span> <span class="nav-text">背包合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尝试"><span class="nav-number">10.</span> <span class="nav-text">尝试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">11.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答辩总结"><span class="nav-number">12.</span> <span class="nav-text">答辩总结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">布笠</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'BdmqkuIswxycpuqmcQD8CyCg-gzGzoHsz',
+    appKey: 'Cus3Bff7PDHJqn8JmQEoiDQ2',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
