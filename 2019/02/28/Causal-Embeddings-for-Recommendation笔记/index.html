@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="感想写了这东西之后，就感觉自己像是立了个flag一样……">
-<meta name="keywords" content="算法,心得">
+  <meta name="description" content="摘要应用中期望使用推荐策略来推荐最适合的结果来改变用户行为，最大化推荐收益，如极大化点击率等。但由于推荐系统改变了用户的行为方式，使得用户的日志行为和原本的用户自然行为有了比较大的差异。简单的在用户日志上训练和评估推荐策略，产生的结果和用户的自然行为产生比较大的误差。论文中提出一种矩阵分解的方法，利用随机曝光的数据，得到了更好的结果。">
+<meta name="keywords" content="推荐,recommendation">
 <meta property="og:type" content="article">
-<meta property="og:title" content="腾讯社交广告高校算法大赛心得">
-<meta property="og:url" content="http://yoursite.com/2017/05/21/腾讯社交广告高校算法大赛心得/index.html">
+<meta property="og:title" content="《Causal Embeddings for Recommendation》笔记">
+<meta property="og:url" content="http://yoursite.com/2019/02/28/Causal-Embeddings-for-Recommendation笔记/index.html">
 <meta property="og:site_name" content="布笠Blog">
-<meta property="og:description" content="感想写了这东西之后，就感觉自己像是立了个flag一样……">
+<meta property="og:description" content="摘要应用中期望使用推荐策略来推荐最适合的结果来改变用户行为，最大化推荐收益，如极大化点击率等。但由于推荐系统改变了用户的行为方式，使得用户的日志行为和原本的用户自然行为有了比较大的差异。简单的在用户日志上训练和评估推荐策略，产生的结果和用户的自然行为产生比较大的误差。论文中提出一种矩阵分解的方法，利用随机曝光的数据，得到了更好的结果。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-16T16:33:29.371Z">
+<meta property="og:updated_time" content="2019-03-16T18:48:29.297Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="腾讯社交广告高校算法大赛心得">
-<meta name="twitter:description" content="感想写了这东西之后，就感觉自己像是立了个flag一样……">
+<meta name="twitter:title" content="《Causal Embeddings for Recommendation》笔记">
+<meta name="twitter:description" content="摘要应用中期望使用推荐策略来推荐最适合的结果来改变用户行为，最大化推荐收益，如极大化点击率等。但由于推荐系统改变了用户的行为方式，使得用户的日志行为和原本的用户自然行为有了比较大的差异。简单的在用户日志上训练和评估推荐策略，产生的结果和用户的自然行为产生比较大的误差。论文中提出一种矩阵分解的方法，利用随机曝光的数据，得到了更好的结果。">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/21/腾讯社交广告高校算法大赛心得/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/28/Causal-Embeddings-for-Recommendation笔记/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>腾讯社交广告高校算法大赛心得 | 布笠Blog</title>
+  <title>《Causal Embeddings for Recommendation》笔记 | 布笠Blog</title>
   
 
 
@@ -340,7 +340,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/21/腾讯社交广告高校算法大赛心得/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/28/Causal-Embeddings-for-Recommendation笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="布笠">
@@ -357,7 +357,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">腾讯社交广告高校算法大赛心得
+          <h1 class="post-title" itemprop="name headline">《Causal Embeddings for Recommendation》笔记
 
               
             
@@ -383,7 +383,7 @@
                 
               
 
-              <time title="创建时间：2017-05-21 13:31:28" itemprop="dateCreated datePublished" datetime="2017-05-21T13:31:28+08:00">2017-05-21</time>
+              <time title="创建时间：2019-02-28 15:37:21" itemprop="dateCreated datePublished" datetime="2019-02-28T15:37:21+08:00">2019-02-28</time>
             
 
             
@@ -400,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-17 00:33:29" itemprop="dateModified" datetime="2019-01-17T00:33:29+08:00">2019-01-17</time>
+                <time title="修改时间：2019-03-17 02:48:29" itemprop="dateModified" datetime="2019-03-17T02:48:29+08:00">2019-03-17</time>
               
             
           </span>
@@ -417,7 +417,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/竞赛/" itemprop="url" rel="index"><span itemprop="name">竞赛</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/报告/" itemprop="url" rel="index"><span itemprop="name">报告</span></a></span>
 
                 
                 
@@ -435,8 +435,8 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
             
-                <a href="/2017/05/21/腾讯社交广告高校算法大赛心得/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/05/21/腾讯社交广告高校算法大赛心得/" itemprop="commentCount"></span>
+                <a href="/2019/02/28/Causal-Embeddings-for-Recommendation笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/02/28/Causal-Embeddings-for-Recommendation笔记/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -471,11 +471,19 @@
       
 
       
-        <h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>写了这东西之后，就感觉自己像是立了个flag一样……<br><a id="more"></a></p>
-<h2 id="特征的选择"><a href="#特征的选择" class="headerlink" title="特征的选择"></a>特征的选择</h2><p>　　关于特征选择，其中有两个方面是应该值得关注的。<br>　　一方面是特征的重要性，特征的重要性反映的是特征对模型效果的影响程度，理论上重要性越高的特征应该保留下来，而重要性较低的会考虑删除。特征越多，会使得模型越复杂，减少不必要的特征会使得模型更加稳定。其中常用的方法可以考虑xgboost中计算的特征重要性，或者是通过扰乱某个特征值的次序根据模型效果变化来得出。特征重要性计算的方法不少，大家可以再网上查找一下。<br>　　另一方面是特征分布是否一致，特征分布主要考虑的是线上和线下的分布差异。由于这次比赛的数据具有时序性，并且很多选手也因为在提取特征时因为信息泄露的原因导致线下成绩提升而线上成绩降低，这些问题都可以通过特征值的分布差异来排除掉，当分布不一致的特征，我们应该优先删除。特征分布差异，简单的可以通过线下和线上特征值的均值、标准差差异来考虑，或者基于其它的统计学的方法。<br>通过特征的重要性和分布综合考虑，应该就可以得到比较理想的特征效果了。</p>
-<h2 id="特征生成"><a href="#特征生成" class="headerlink" title="特征生成"></a>特征生成</h2><p>　　关于特征生成，大体上可以分为两个大方向。<br>　　一个方向就是俗称的“拍脑袋”，根据个人对于数据观测、题目理解等考虑，得出的一系列规则转化为特征。这样很容易就会产生一系列有用或者无用的特征（比如one-hot、各种的转化率、点击量等特征），其中很多的特征所代表的意义其实是重复的，比如对各种ID做转化率的特征，当特征数量越来越多后，提取这类的特征会显得毫无意义。所以应该多角度的来提取特征，使得特征之间形成互补。<br>　　一方面是通过其它模型的结果来生成各种特征，其中能否通过深度学习来产生新的特征？LDA来分析用户和app之间的关系？特征之间不断的组合能否产生比较好的特征？这需要通过对数据的理解，不断的尝试和分析。不过我的并不建议那么快的考虑用其它的模型来生成特征，毕竟这种方法生成的特征有时候并不能很好的理解，并且需要的工作量也比较大，有时候生成的特征也并不一定有效果。</p>
-<h2 id="模型的理解"><a href="#模型的理解" class="headerlink" title="模型的理解"></a>模型的理解</h2><p>　　群里面很多的同学知道该用哪个模型，但是并没有理解模型的原理，所以把很多的时间浪费在模型的选取和调参上。事实上，我们应该先对模型有个比较基础的了解，明白模型以及各个参数的原理，这样才能指引我们如果去生成模型适合使用的特征以及怎样去调参。比如，我选取的模型是xgboost，基本上我是没怎么使用one-hot的特征。<br>　　对于刚开始比赛来讲，模型应该是简单点比较好，这样主要为了方便特征的生成和选择。当特征方面的工作做到一定的程度上，则可以考虑更复杂的模型来提高效果了。至于模型融合等方面的资料，可以参考网上历来各种比赛分享的资料了。</p>
-<h2 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h2><p>　　参加比赛的时候，很多时候选手会因为效果不好等各种原因难免产生比较浮躁和消极的情绪。但我觉得，参加比赛来讲，最重要的是在比赛中有所收获并且提升自己，最直接的方法就是多想多做，而不是光想不做。毕竟比赛的竞争是比较激烈的，获奖的名额比例也不高。或许最后什么名次也没拿到，但是通过不断的提升自己或许以后工作可以升职加薪呢，而这样算下来的钱应该比一个比赛的奖金要多吧。</p>
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>应用中期望使用推荐策略来推荐最适合的结果来改变用户行为，最大化推荐收益，如极大化点击率等。但由于推荐系统改变了用户的行为方式，使得用户的日志行为和原本的用户自然行为有了比较大的差异。简单的在用户日志上训练和评估推荐策略，产生的结果和用户的自然行为产生比较大的误差。论文中提出一种矩阵分解的方法，利用随机曝光的数据，得到了更好的结果。<br><a id="more"></a> </p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>Bonner S, Vasile F. Causal embeddings for recommendation[C]//Proceedings of the 12th ACM Conference on Recommender Systems. ACM, 2018: 104-112.</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>应用的推荐策略向用户推送结果，然后用户点击、浏览的记录行为即用户日志。直接在用户日志上训练、评估推荐策略，除了产生的推荐结果和用户自然行为产生较大误差，也会使得频次高但历史悠久的商品依然被推荐很多。这个我比较深有感触，在实习期间发现，两个月前的内容依然被不断推荐给用户，由于内容本身与明星相关，点击率不会很低，可由于历史悠久点击率也上不去。对于这种比较旧的内容是应该降低推荐的频次，尝试推荐新的内容产生更好的收益。对于新内容缺乏训练数据，这方面就是多臂赌博机问题了。这是由于用户日志行为是被推荐策略改变的行为的偏好，如果能直接在用户的自然行为上进行策略学习，推荐的结果就是最符合用户的偏好。</p>
+<p>用户的自然行为可以看作是向用户随机推荐商品产生的用户行为记录。由于随机策略不会改变商品曝光的概率分布（即是商品曝光概率是相同的），因此用户的行为记录能反映真实的偏好。但随机策略产生的收益较低，因为推荐的结果和用户的偏好通常是不吻合的。所以很难应用随机推荐策略产生大量的数据来学习好的推荐策略。</p>
+<p>其中，两种策略的对比如下：</p>
+<ol>
+<li>应用推荐策略，数据量大，精度高，但改变用户的自然行为。</li>
+<li>随机策略，数据量少，精度低，反映用户的自然行为。</li>
+</ol>
+<p>论文中采用多任务学习来训练模型，方法之前的证明感觉和方法没什么太大的关联，都是为了证明考虑自然行为的有效性。</p>
+<p>对于推荐策略的学习目标是：<br>$$L_{t}=\sum_{\left(i, j, y_{i j}\right) \in S_{t}} l_{i j}^{t}=L\left(U \Theta_{t}, Y_{t}\right)+\Omega\left(\Theta_{t}\right)$$<br>可以看出，通过用户嵌入$U$和物品嵌入$\Theta_t$计算的内积得到用户点击概率，就是简单的FM模型。而对于随机策略的数据也是类似的：<br>$$L_{c}=L\left(U \Theta_{c}, Y_{c}\right)+\Omega\left(\Theta_{c}\right)+\Omega\left(\Theta_{t}-\Theta_{c}\right)$$<br>和之前相比只是物品嵌入$\Theta_c$不同，其中两个物品嵌入之间的联系，用一个超参来控制它们的差异。</p>
+<p>在实验里，通过平衡物品间曝光的概率，得到随机策略产生的数据，这部分我是比较的有疑问的。</p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>论文中认为只考虑推荐策略结果来训练模型的问题，解释了我一直以来的疑问。通过考虑用户自然行为来提升模型效果，这个概念我觉得是比较有意思的。但方法中简单使用多任务学习，我觉得好像也太简单了点。而且不适用于推广到其它复杂的模型上。</p>
 
       
     </div>
@@ -499,9 +507,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/推荐/" rel="tag"># 推荐</a>
           
-            <a href="/tags/心得/" rel="tag"># 心得</a>
+            <a href="/tags/recommendation/" rel="tag"># recommendation</a>
           
         </div>
       
@@ -514,8 +522,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/01/机场停机位资源分配优化/" rel="next" title="机场停机位资源分配优化">
-                <i class="fa fa-chevron-left"></i> 机场停机位资源分配优化
+              <a href="/2017/07/08/腾讯社交广告高校算法大赛总结/" rel="next" title="腾讯社交广告高校算法大赛总结">
+                <i class="fa fa-chevron-left"></i> 腾讯社交广告高校算法大赛总结
               </a>
             
           </div>
@@ -523,10 +531,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/08/腾讯社交广告高校算法大赛总结/" rel="prev" title="腾讯社交广告高校算法大赛总结">
-                腾讯社交广告高校算法大赛总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -694,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#感想"><span class="nav-number">1.</span> <span class="nav-text">感想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征的选择"><span class="nav-number">2.</span> <span class="nav-text">特征的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征生成"><span class="nav-number">3.</span> <span class="nav-text">特征生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型的理解"><span class="nav-number">4.</span> <span class="nav-text">模型的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建议"><span class="nav-number">5.</span> <span class="nav-text">建议</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">3.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感想"><span class="nav-number">4.</span> <span class="nav-text">感想</span></a></li></ol></div>
             
 
           </div>
