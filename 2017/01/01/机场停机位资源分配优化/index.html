@@ -105,7 +105,7 @@
 <meta property="og:description" content="题目描述https://tianchi.shuju.aliyun.com/outsource/offer/projectdetails.htm?spm=5176.8199929.0.0.nPvIru&amp;amp;id=3092机场每天都有大量的航班起降，每个航班降落以后都会分配到一个指定的机位进行保障，保障结束以后再离开进行下一航段。为了保障每个航班都有相应的机位，机场会提前安排好第二天的所有飞机机位">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/airport/1.png">
-<meta property="og:updated_time" content="2019-01-16T16:33:54.798Z">
+<meta property="og:updated_time" content="2019-03-27T16:08:48.260Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机场停机位资源分配优化">
 <meta name="twitter:description" content="题目描述https://tianchi.shuju.aliyun.com/outsource/offer/projectdetails.htm?spm=5176.8199929.0.0.nPvIru&amp;amp;id=3092机场每天都有大量的航班起降，每个航班降落以后都会分配到一个指定的机位进行保障，保障结束以后再离开进行下一航段。为了保障每个航班都有相应的机位，机场会提前安排好第二天的所有飞机机位">
@@ -402,7 +402,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-17 00:33:54" itemprop="dateModified" datetime="2019-01-17T00:33:54+08:00">2019-01-17</time>
+                <time title="修改时间：2019-03-28 00:08:48" itemprop="dateModified" datetime="2019-03-28T00:08:48+08:00">2019-03-28</time>
               
             
           </span>
@@ -529,7 +529,7 @@
 </table>
 <p>在实际使用中，我们主要会采取航班破坏和机位破坏，我们最后的程序中，可以根据自己的实际情况，制定不同的破坏与重建策略。</p>
 <h2 id="算法效果研究"><a href="#算法效果研究" class="headerlink" title="算法效果研究"></a>算法效果研究</h2><p>我们使用机位破坏，每次破坏1/15的机位，迭代了10000次，运行了6个小时，每次大约2.2秒，最后结果到了14.38，下面是运行结果图：</p>
-<p><div align="center"><img src="/images/airport/1.png" width="50%"><br>可以看到前期收敛是非常快的，迭代500次，就到达了14.3，大约用时20分钟。不过后面的收敛就非常的缓慢了。<br>    当加大破坏比例后，其收敛能够加快，这里没有数据了，这是我们多次实践的经验结果，具体的详细研究还需要很多的时间。<br>    在对算法的各种性质进行深入实验研究后，可以根据各种不同破坏方式下破坏不同比例的性质的不同，制定最优策略，以达到更快的得到更好的解的目的，目前的策略只是一个感性的策略，根据的是经验。</div></p>
+<p><div align="center"><img src="/images/airport/1.png" width="50%"></div><br>可以看到前期收敛是非常快的，迭代500次，就到达了14.3，大约用时20分钟。不过后面的收敛就非常的缓慢了。<br>    当加大破坏比例后，其收敛能够加快，这里没有数据了，这是我们多次实践的经验结果，具体的详细研究还需要很多的时间。<br>    在对算法的各种性质进行深入实验研究后，可以根据各种不同破坏方式下破坏不同比例的性质的不同，制定最优策略，以达到更快的得到更好的解的目的，目前的策略只是一个感性的策略，根据的是经验。</p>
 <h2 id="最优结果说明"><a href="#最优结果说明" class="headerlink" title="最优结果说明"></a>最优结果说明</h2><p>目前的最优解可以说是我们在进行实验过程中得到的解，我们曾经想到的各种优化方案，都曾经应用到了产生这个解的过程中。还有我们在优化的过程中也是断断续续的跑的，白天要上班或上课，电脑不能跑，到晚上才能跑，所以具体目前得到这个解跑了多久，我们也是不清楚的。<br>    现在要复现这个解也是可以复现，按照现在的算法，只要设置对相应的破坏与重建策略，肯定可以到达现在的解，只是时间问题，因为越到后面收敛是越来越慢的，其实到14.399我们只花了一个晚上了时间，但是到现在的14.4008花了好多个晚上。</p>
 <h2 id="比赛总结"><a href="#比赛总结" class="headerlink" title="比赛总结"></a>比赛总结</h2><p>在比赛的过程中也不是一帆风顺的，前期的工作也尝试过各种不同的方法：</p>
 <ul>
@@ -664,7 +664,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -722,7 +722,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">14</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

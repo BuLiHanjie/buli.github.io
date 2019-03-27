@@ -105,8 +105,11 @@
 <meta property="og:description" content="题目描述https://tianchi.shuju.aliyun.com/competition/information.htm?spm=5176.100067.5678.2.nXeJox&amp;amp;raceId=231581最后一公里极速配送大赛主要针对赛题背景中提到的电商包裹和同城O2O包裹提供最优的快递员配送方案，快递员需要在指定时间去商户提取并在指定时间内配送至消费者。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/one-km/summary.png">
+<meta property="og:image" content="http://yoursite.com/images/one-km/eq2.png">
+<meta property="og:image" content="http://yoursite.com/images/one-km/eq1.png">
 <meta property="og:image" content="http://yoursite.com/images/one-km/flow.png">
-<meta property="og:updated_time" content="2019-01-16T16:34:52.334Z">
+<meta property="og:image" content="http://yoursite.com/images/one-km/dp_loss.png">
+<meta property="og:updated_time" content="2019-03-27T16:27:50.759Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最后一公里极速配送">
 <meta name="twitter:description" content="题目描述https://tianchi.shuju.aliyun.com/competition/information.htm?spm=5176.100067.5678.2.nXeJox&amp;amp;raceId=231581最后一公里极速配送大赛主要针对赛题背景中提到的电商包裹和同城O2O包裹提供最优的快递员配送方案，快递员需要在指定时间去商户提取并在指定时间内配送至消费者。">
@@ -403,7 +406,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-17 00:34:52" itemprop="dateModified" datetime="2019-01-17T00:34:52+08:00">2019-01-17</time>
+                <time title="修改时间：2019-03-28 00:27:50" itemprop="dateModified" datetime="2019-03-28T00:27:50+08:00">2019-03-28</time>
               
             
           </span>
@@ -488,20 +491,13 @@
 <li>快递员抵达商家的时间，不大于商家要求的取件的时间或超过的时间有个上限值。</li>
 </ol>
 <p>基于假设，可以认为快递员在商家要求的区间时间收取O2O包裹，并且立即运送到相应的用户，与原问题相比少了时间窗口限制和容量的限制，容易得到的数学模型表达如下：</p>
-<p>设n是O2O包裹数量，m是配送的快递员数量， 表示第i个O2O包裹， 表示第i个O2O包裹的取件时间。<br>相关二进制变量如下：<br>$$g_{ij}=\begin{cases}1&amp; 派送包裹i后派送包裹j\\0&amp; 其它情况\end{cases}$$</p>
+<p>设n是O2O包裹数量，m是配送的快递员数量， 表示第i个O2O包裹， 表示第i个O2O包裹的取件时间。<br>相关二进制变量如下：<br><!-- $$g_{ij}=\begin{cases}1& 派送包裹i后派送包裹j\\0& 其它情况\end{cases}$$ --></p>
+<div align="center"><img src="/images/one-km/eq2.png"></div>
+
 <p>最小化目标函数：<br>$$\mathop {\min }f=\sum_{i=0}^n\sum_{j=0}^ng_{ij}*cost(x_i,x_j)+\sum_{i=0}^nhandle(x_i)$$</p>
-<p>s.t.<br>$$\left|\left\{j \left.\right| \sum_{i=0}^ng_{ij}=0 \right\}\right|=m$$<br>$$\sum_{j=0}^ng_{ij}\leq1\ and\ g_{ij}=0\ i\in[0,n)$$</p>
-<p>$cost$是根据题目计算的两个O2O包裹间路程的耗时，$handle$是配送O2O包裹的耗时，容易得出公式的第二项是一个常数。</p>
-<p>对于问题的求解，容易得出一个费用流的求解方法，有两个参数分别是派送的快递员数量$m$和时间差$tl$：</p>
-<ol>
-<li>图中有一个起始顶点$S$和终止顶点$T$；</li>
-<li>图中有一个顶点$A$，限制派送包裹的快递员数量，起始点$S$与顶点$A$中有一条容量为m费用为0的弧；</li>
-<li>每个包裹对应有两个顶点$B_i$和$C_i$，顶点$B_i$和$C_i$之间有一条容量为1费用为$10000-handle(x_i)$的弧，用来保证每个包裹只被派送一次，而费用加上一个很大的常数10000是为了保证每个包裹都被派送，每个包裹都加上相同的常数并不影响最小化目标函数的求解，$handle(x_i)$是派送包裹的耗时；</li>
-<li>当包裹$i$的取件时间不大于的送达时间$tl$（送达时间是指在取件时间开始派送包裹$j$，送到用户的时间），$C_i$和$B_i$之间有一条容量为1费用为从包裹i用户赶往包裹$j$商户的路上耗时。参数tl是为了有效的减少图的规模，并且在图中每个包裹只考虑了上一个包裹是从取件时间开始派送的，忽略了超时的可能性，适当的允许超时在$tl$范围内能够取得更好的结果。</li>
-<li>顶点$C_i$和终止顶点$T$之间有一条容量为1费用为0的弧。</li>
-</ol>
-<p>最后通过最大费用流的求解即可获得O2O包裹的配送方案，具体的示意图如图所示：</p>
-<p><div align="center"><img src="/images/one-km/flow.png" width="75%"></div></p>
+<p>s.t.<br><!-- $$\left|\left\{j \left.\right| \sum_{i=0}^ng_{ij}=0 \right\}\right|=m$$ --></p>
+<div align="center"><img src="/images/one-km/eq1.png"></div><br>$$\sum_{j=0}^ng_{ij}\leq1\ and\ g_{ij}=0\ i\in[0,n)$$<br><br>$cost$是根据题目计算的两个O2O包裹间路程的耗时，$handle$是配送O2O包裹的耗时，容易得出公式的第二项是一个常数。<br><br>对于问题的求解，容易得出一个费用流的求解方法，有两个参数分别是派送的快递员数量$m$和时间差$tl$：<br><br> 1. 图中有一个起始顶点$S$和终止顶点$T$；<br> 2. 图中有一个顶点$A$，限制派送包裹的快递员数量，起始点$S$与顶点$A$中有一条容量为m费用为0的弧；<br> 3. 每个包裹对应有两个顶点$B_i$和$C_i$，顶点$B_i$和$C_i$之间有一条容量为1费用为$10000-handle(x_i)$的弧，用来保证每个包裹只被派送一次，而费用加上一个很大的常数10000是为了保证每个包裹都被派送，每个包裹都加上相同的常数并不影响最小化目标函数的求解，$handle(x_i)$是派送包裹的耗时；<br> 4. 当包裹$i$的取件时间不大于的送达时间$tl$（送达时间是指在取件时间开始派送包裹$j$，送到用户的时间），$C_i$和$B_i$之间有一条容量为1费用为从包裹i用户赶往包裹$j$商户的路上耗时。参数tl是为了有效的减少图的规模，并且在图中每个包裹只考虑了上一个包裹是从取件时间开始派送的，忽略了超时的可能性，适当的允许超时在$tl$范围内能够取得更好的结果。<br> 5. 顶点$C_i$和终止顶点$T$之间有一条容量为1费用为0的弧。<br><br>最后通过最大费用流的求解即可获得O2O包裹的配送方案，具体的示意图如图所示：<br><div align="center"><img src="/images/one-km/flow.png"></div>
+
 <h2 id="O2O包裹之动态规划合并"><a href="#O2O包裹之动态规划合并" class="headerlink" title="O2O包裹之动态规划合并"></a>O2O包裹之动态规划合并</h2><p>通过费用流得出的O2O包裹配送方案，耗时较大，主要有以下原因：</p>
 <ol>
 <li>O2O的包裹较小，且路程较远，费用流的方法不能有效的利用快递员的运载量；</li>
@@ -509,7 +505,15 @@
 </ol>
 <p>所以，需要一种方案来尽量的合并O2O包裹减少耗时。</p>
 <p>　　假设派送O2O包裹可以用序列$a_1,a_2,……,a_r$来表示，例如:派送一个O2O包裹E0000可以表示为E0000:1,E0000:-1，其中1代表取货，-1代表送达，序列表示取包裹E0000然后配送；派送包裹E0000和E0001的可能序列为E0000:1,E0001:1,E0000:-1,E0001:-1，序列表示取E0000包裹，然后取E0001包裹，依次配送E0000和E0001包裹。<br>　　当存在配送序列$a_1,a_2,…,a_r$和配送序列$b_1,b_2,…,b_t$，最少耗时的配送序列$c_1,c_2,…,c_{r+t}$可以通过动态规划进行求解：<br>　　假设序列$a_i$和$b_i$在最优配送序列ci中，每个O2O包裹的配送顺序与原序列$a_i$和$b_i$相同，虽然此假设并不严谨但在大多数情况下是符合的，基于此假设能够得到动态规划快速求解的方法。<br>　　设$f_{i,j,k}$为序列$a_1,a_2,…,a_i$和序列$b_1,b_2,…,b_j$合并为$c_1,c_2,…,c_{i+j}$的最少耗时，其中i≤r，j≤t，k=0或1代表最后一个动作$c_{i+j}$为$a_i$或$b_j$。</p>
-<p>$$ \mathop {\min }f_{i,j,k}=\mathop {\min }\begin{cases}<br>min(f_{i-1,j,0}+cost(a_{i-1},a_i),f_{i-1,j,1}+cost(a_j,a_i))&amp; k=0\ and\ i\neq0\\<br>min(f_{i,j-1,0}+cost(a_i,a_j),f_{i,j-1,1}+cost(a_{j-1},a_j))&amp; k=1\ and\ j\neq0\\<br>cost(b_0,…,b_j)+cost(b_j,a_0)&amp; k=0\ and\ i=0\\<br>cost(a_0,…,a_i)+cost(a_i,b_0)&amp; k=1\ and\ j=0<br>\end{cases} $$</p>
+<!-- $$ \mathop {\min }f_{i,j,k}=\mathop {\min }\begin{cases}
+min(f_{i-1,j,0}+cost(a_{i-1},a_i),f_{i-1,j,1}+cost(a_j,a_i))& k=0\ and\ i\neq0\\\
+min(f_{i,j-1,0}+cost(a_i,a_j),f_{i,j-1,1}+cost(a_{j-1},a_j))& k=1\ and\ j\neq0\\\
+cost(b_0,...,b_j)+cost(b_j,a_0)& k=0\ and\ i=0\\\
+cost(a_0,...,a_i)+cost(a_i,b_0)& k=1\ and\ j=0
+\end{cases} $$ -->
+<!-- $$\min f_{i, j, k}=\min \left\{\begin{array}{ll}{\min \left(f_{i-1, j, 0}+\operatorname{cost}\left(a_{i-1}, a_{i}\right), f_{i-1, j, 1}+\operatorname{cost}\left(a_{j}, a_{i}\right)\right)} & {k=0 \text { and } i \neq 0} \\ {\min \left(f_{i, j-1,0}+\operatorname{cost}\left(a_{i}, a_{j}\right), f_{i, j-1,1}+\operatorname{cost}\left(a_{j-1}, a_{j}\right)\right)} & {k=1 \text { and } j \neq 0} \\ {\cos t\left(b_{0}, \ldots, b_{j}\right)+\operatorname{cost}\left(b_{j}, a_{0}\right)} & {k=0 \text { and } i=0} \\ {\operatorname{cost}\left(a_{0}, \ldots, a_{i}\right)+\operatorname{cost}\left(a_{i}, b_{0}\right)} & {k=1 \text { and } j=0}\end{array}\right.$$ -->
+<div align="center"><img src="/images/one-km/dp_loss.png" width="75%"></div>
+
 <p>计算过程中$f_{i,j,k}$需要判断序列的包裹合法和相应的路程时间。<br>由此可以得到一个有效的贪心策略：</p>
 <ol>
 <li>假设参数$t$；</li>
@@ -662,7 +666,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -720,7 +724,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">14</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

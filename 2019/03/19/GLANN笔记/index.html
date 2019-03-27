@@ -96,29 +96,35 @@
 
 
 
-  <meta name="description" content="题目描述http://algo.tpai.qq.com/home/home/index.html">
+  <meta name="description" content="摘要虽然生成对抗网络（GANs）在图像生成的任务中大放异彩，但依然存在着各种各样的问题。论文中参考GLO和IMLE模型，提出非对抗式的图像生成模型GLANN，克服了GANs的缺点，得到了不错的效果。">
+<meta name="keywords" content="图像,生成">
 <meta property="og:type" content="article">
-<meta property="og:title" content="腾讯社交广告高校算法大赛总结">
-<meta property="og:url" content="http://yoursite.com/2017/07/08/腾讯社交广告高校算法大赛总结/index.html">
+<meta property="og:title" content="GLANN笔记">
+<meta property="og:url" content="http://yoursite.com/2019/03/19/GLANN笔记/index.html">
 <meta property="og:site_name" content="布笠Blog">
-<meta property="og:description" content="题目描述http://algo.tpai.qq.com/home/home/index.html">
+<meta property="og:description" content="摘要虽然生成对抗网络（GANs）在图像生成的任务中大放异彩，但依然存在着各种各样的问题。论文中参考GLO和IMLE模型，提出非对抗式的图像生成模型GLANN，克服了GANs的缺点，得到了不错的效果。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/tpai_summary/1.jpg">
-<meta property="og:image" content="http://yoursite.com/images/tpai_summary/2.jpg">
-<meta property="og:image" content="http://yoursite.com/images/tpai_summary/3.jpg">
-<meta property="og:image" content="http://yoursite.com/images/tpai_summary/4.jpg">
-<meta property="og:updated_time" content="2019-03-27T16:08:22.514Z">
+<meta property="og:image" content="http://yoursite.com/images/GLANN/glo_loss.png">
+<meta property="og:image" content="http://yoursite.com/images/GLANN/glo.png">
+<meta property="og:image" content="http://yoursite.com/images/GLANN/imle.png">
+<meta property="og:image" content="http://yoursite.com/images/GLANN/imle_eq1.png">
+<meta property="og:image" content="http://yoursite.com/images/GLANN/glann.png">
+<meta property="og:image" content="http://yoursite.com/images/GLANN/latent_emb.png">
+<meta property="og:image" content="http://yoursite.com/images/GLANN/eq2.png">
+<meta property="og:image" content="http://yoursite.com/images/GLANN/eq3.png">
+<meta property="og:image" content="http://yoursite.com/images/GLANN/result.png">
+<meta property="og:updated_time" content="2019-03-27T17:16:19.136Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="腾讯社交广告高校算法大赛总结">
-<meta name="twitter:description" content="题目描述http://algo.tpai.qq.com/home/home/index.html">
-<meta name="twitter:image" content="http://yoursite.com/images/tpai_summary/1.jpg">
+<meta name="twitter:title" content="GLANN笔记">
+<meta name="twitter:description" content="摘要虽然生成对抗网络（GANs）在图像生成的任务中大放异彩，但依然存在着各种各样的问题。论文中参考GLO和IMLE模型，提出非对抗式的图像生成模型GLANN，克服了GANs的缺点，得到了不错的效果。">
+<meta name="twitter:image" content="http://yoursite.com/images/GLANN/glo_loss.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/08/腾讯社交广告高校算法大赛总结/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/19/GLANN笔记/">
 
 
 
@@ -128,7 +134,7 @@
   };
 </script>
 
-  <title>腾讯社交广告高校算法大赛总结 | 布笠Blog</title>
+  <title>GLANN笔记 | 布笠Blog</title>
   
 
 
@@ -344,7 +350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/08/腾讯社交广告高校算法大赛总结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/GLANN笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="布笠">
@@ -361,7 +367,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">腾讯社交广告高校算法大赛总结
+          <h1 class="post-title" itemprop="name headline">GLANN笔记
 
               
             
@@ -387,7 +393,7 @@
                 
               
 
-              <time title="创建时间：2017-07-08 16:39:50" itemprop="dateCreated datePublished" datetime="2017-07-08T16:39:50+08:00">2017-07-08</time>
+              <time title="创建时间：2019-03-19 00:44:41" itemprop="dateCreated datePublished" datetime="2019-03-19T00:44:41+08:00">2019-03-19</time>
             
 
             
@@ -404,11 +410,29 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-28 00:08:22" itemprop="dateModified" datetime="2019-03-28T00:08:22+08:00">2019-03-28</time>
+                <time title="修改时间：2019-03-28 01:16:19" itemprop="dateModified" datetime="2019-03-28T01:16:19+08:00">2019-03-28</time>
               
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/报告/" itemprop="url" rel="index"><span itemprop="name">报告</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -421,8 +445,8 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
             
-                <a href="/2017/07/08/腾讯社交广告高校算法大赛总结/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/07/08/腾讯社交广告高校算法大赛总结/" itemprop="commentCount"></span>
+                <a href="/2019/03/19/GLANN笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/03/19/GLANN笔记/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -457,45 +481,53 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><a href="http://algo.tpai.qq.com/home/home/index.html" target="_blank" rel="noopener">http://algo.tpai.qq.com/home/home/index.html</a><br><a id="more"></a></p>
-<h2 id="成绩"><a href="#成绩" class="headerlink" title="成绩"></a>成绩</h2><p>决赛第7名</p>
-<h2 id="赛题分析"><a href="#赛题分析" class="headerlink" title="赛题分析"></a>赛题分析</h2><p> 　　比赛中，我们比较关心的一个问题在于：数据线上线下分布不一致：1、某些app和用户的记录比较少；2、数据的时效性要求较高。这对于特征工程会是一个比较大的要求，在比赛中有许多的特征会使得线上的成绩下降，比如各种差分的特征。</p>
-<h2 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h2><p>特征的提取主要有以下几个方面：</p>
-<ol>
-<li>基础特征：计数特征、转化率、比例特征等各种基本的特征； </li>
-<li>线上的特征：基于当天数据统计的用户行为、app行为的特征；</li>
-<li>用户行为挖掘特征：word2vec计算用户行为与历史行为的关联；</li>
-</ol>
-<p>特征提取方式有以下几个方面考虑：</p>
-<ol>
-<li>基于cv统计、贝叶斯平滑等方法，能够很好的修正线上线下的特征分布不一致的问题；</li>
-<li>特征提取主要有基于全局的数据统计以及滑窗的历史统计。<ul>
-<li>基于全集的数据统计生成的特征：是决赛中主要的特征提取方式，效果比较平稳，而且信息量比较多，但容易会有信息泄露的问题需要通过cv统计来避免，而且难以反映时间变化的信息。</li>
-<li>基于滑窗的生成特征：能反映时序上的信息，不会有信息泄露的问题。但是生成的特征数量多，线上线下的分布差异比较大，特征工程方面的工作量比较大。</li>
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>虽然生成对抗网络（GANs）在图像生成的任务中大放异彩，但依然存在着各种各样的问题。论文中参考GLO和IMLE模型，提出非对抗式的图像生成模型GLANN，克服了GANs的缺点，得到了不错的效果。<br><a id="more"></a> </p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>Hoshen Y, Malik J. Non-Adversarial Image Synthesis with Generative Latent Nearest Neighbors[J]. arXiv preprint arXiv:1812.08985, 2018.</li>
+<li>Li, K., &amp; Malik, J. (2018). Implicit Maximum Likelihood Estimation. Retrieved from <a href="http://arxiv.org/abs/1809.09087" target="_blank" rel="noopener">http://arxiv.org/abs/1809.09087</a></li>
+<li>Bojanowski, P., Joulin, A., Lopez-Paz, D., &amp; Szlam, A. (2017). Optimizing the Latent Space of Generative Networks. <a href="https://doi.org/10.1021/ja00066a057" target="_blank" rel="noopener">https://doi.org/10.1021/ja00066a057</a></li>
 </ul>
-</li>
-</ol>
-<p>因此，比赛中我选择了两种生成特征的方式来产生不同的模型进行融合。</p>
-<h2 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h2><ul>
-<li>在初赛阶段，主要有以下三种方式来筛选特征：1、删除线上线下均值差异30%以上的特征；2、通过xgboost计算的特征重要性，删除重要性较低的特征；3、通过wrapper的方式选择特征。通过以上方式能够保证线上线下的特征稳定，但这工作在决赛数据量大的情况下会比较耗时。</li>
-<li>在决赛阶段，每加入一部分特征，通过线上的成绩反馈来选择特征的去留。</li>
-</ul>
-<h2 id="模型方法"><a href="#模型方法" class="headerlink" title="模型方法"></a>模型方法</h2><p>　　比赛中主要使用stacking 的方式，其中一个模块的示意图如下：</p>
-<div align="center"><img src="/images/tpai_summary/1.jpg" width="75%"></div>
-
-<p>　　如图所示，模块中使用cv的方法，把数据分成5份来进行训练和预测，这样模型的效果会比单模型的要好些（相当于投票的一种策略）。此外模块中stack3层，每一层使用原有的特征和预测值作为下一个模型的输入，增强模块的精度。模型中使用xgboost和lightgbm。<br>　　这种模型的缺点在于，效率是单模型的十几倍，因此需要一种策略来保证效率。这里我使用分而治之的思想，每一次训练使用上一个模块的预测值和当前新提取的特征，作为下一个模块的输入进行训练，不断迭代。这样相当于把所有的特征分成很多部分分开训练，并且在决赛中通过线上成绩反馈来选择特征的去留。最终模型的流水线如下：<br>　　<div align="center"><img src="/images/tpai_summary/2.jpg" width="75%"></div><br>　　Component就是模型的一个模块（cv5份和stack3层的模块），每次提取新的特征则加入到新的component中训练。这里流水线中使用了15个模块。<br>　　实验中，随着加入的特征越多，模型效果变得更好。模型的效果如下：</p>
-<div align="center"><img src="/images/tpai_summary/3.jpg" width="75%"></div>
-
-<h2 id="模型融合"><a href="#模型融合" class="headerlink" title="模型融合"></a>模型融合</h2><p>主要有两种融合的方式：</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>图像生成的定义即是：给定有限的图像训练样本学习得到能生成整个图像分布的函数。<br>GANs由于其鲁棒的生成能力，能够把无监督学习的任务转化为一个有监督的学习任务，能够适用于各种图像任务中，如不同域之间的无监督图像转换、生成超分辨率图像等。但GANs依然存在以下两个问题：</p>
 <ol>
-<li>加权融合：当融合的模型效果差异大时，根据线上的成绩人工设定融合的权重；</li>
-<li>logistic平均：当融合的模型效果差异小时，采用以下公式进行融合：$p=f(\frac{\sum_i f^{-1}(p_i)}{n})$</li>
+<li>难训练：训练过程不稳定、训练突然崩溃和对超参数敏感。通常可以考虑降低判别器的性能或者换更好的损失函数来缓解这方面的问题。</li>
+<li>模式丢失：只能建模目标分布的某些模式而不是全部。实践中容易发现，生成器可能会只生成某几种样式的图片，使得图片的多样性降低。<br>因此，有相关的工作被提出来，使用非对抗式的图像生成模型，能够捕捉训练集中所有的模式，并且也能够得到效果不错的图片。</li>
 </ol>
-<p>除了stacking的模型，同时也考虑全集和滑窗特征上的单模型效果，还有每个component成绩，进行融合：</p>
-<div align="center"><img src="/images/tpai_summary/4.jpg" width="75%"></div>
+<h2 id="GLO介绍"><a href="#GLO介绍" class="headerlink" title="GLO介绍"></a>GLO介绍</h2><p>GLO（Generative Latent Optimization）模型通过学习隐变量到图片的映射函数，最终能够得编码所有模式（每个图片有对应的隐变量编码得到），具有以下的优点：</p>
+<ol>
+<li>无编码丢失地编码整个分布；</li>
+<li>隐含编码之间的欧几里德距离对应于形义方面的含义差异；</li>
+<li>隐含编码的分布未知，如果随机的从一个分布中采样的隐含变量计算得到的图像较差。</li>
+</ol>
+<p>GLO算法具体如下图所示， 对于所有的图片都赋予一个隐变量$z_i$，模长限定为1。然后通过一个CNN的网络得到图片，然后采用Lap1 loss来进行优化。其中loss函数是<br><!-- $$\operatorname{Lap}_{1}\left(x, x^{\prime}\right)=\sum_{j} 2^{-2 j}\left|L^{j}(x)-L^{j}\left(x^{\prime}\right)\right|_{1}$$ --></p>
+<div align="center"><img src="/images/GLANN/glo_loss.png"></div>
 
-<hr>
-<p>##赛后总结<br>　　个人感觉在模型的stack方面，已经做到了很好的程度，实验的结果表明比单模型的效果要好且鲁棒性更高。但是决赛后期尝试使用ffm算法，但是效果一直不理想，所以只是稍微的加进去原来的模型中进行融合。</p>
+<p>考虑生成图像和真实样本之间不同维度间的差异。并且每个图片$x_i$通过训练有对应的$z_i$生成得到，因此图像的生成分布能够捕捉训练集的所有模式。但由于隐藏空间的分布是未知的，$z_i$是通过学习得到，难以选择适合的隐藏变量来生成别的图像。</p>
+<div align="center"><img src="/images/GLANN/glo.png"></div>
+
+<h2 id="IMLE介绍"><a href="#IMLE介绍" class="headerlink" title="IMLE介绍"></a>IMLE介绍</h2><p>IMLE（Implicit Maximum Likelihood Estimation）也是非对抗式的图像生成方法之一。其中，隐变量$z_i$服从某个分布，，然后采用最近邻的训练方式，使得训练样本在隐空间中都有隐变量生成得到与之相近的图像。具体的算法流程如下图所示：</p>
+<div align="center"><img src="/images/GLANN/imle.png"></div>
+
+<p>对于每个批次的样本，首先从隐变量中采样生成大量的图像，然后训练样本从中找到与之最近的生成样本，计算L2 loss进行优化：</p>
+<!-- $$\sigma(i) \leftarrow \arg \min _{j}\left\|\mathbf{x}_{i}-\tilde{\mathbf{x}}_{j}^{\theta}\right\|_{2}^{2} \forall i \in S$$ -->
+<div align="center"><img src="/images/GLANN/imle_eq1.png"></div>
+
+<p>这个步骤是从隐空间中找到最近的隐变量进行优化，具体所用的指标对 IMLE 影响很大，尤其是当训练集大小有限时。当使用 L2 损失直接在图像像素上训练时，IMLE 合成的图像是模糊不清的。</p>
+<h2 id="GLANN介绍"><a href="#GLANN介绍" class="headerlink" title="GLANN介绍"></a>GLANN介绍</h2><p>GLANN（Generative Latent Nearest Neighbors）模型，本质上就是结合了 IMLE 和 GLO 两者之长，克服了两种方法各自的主要缺点。因此模型具有易采样、能建模整个分布、训练稳定且能合成锐利的图像的特点。其具体模型如下图所示：</p>
+<div align="center"><img src="/images/GLANN/glann.png"></div>
+
+<p>如图所示，模型主要包含三部分，隐变量的学习、隐变量与分布的对齐和生成图像。</p>
+<h3 id="隐变量学习"><a href="#隐变量学习" class="headerlink" title="隐变量学习"></a>隐变量学习</h3><p>与GLO模型相似，也是每个训练样本有一个对应的可学习隐变量$z_i$，通过学习隐变量和图像之间的映射函数得到图像生成函数：<br><!-- $$\arg \min _{\tilde{G},\left\{z_{i}\right\}} \sum_{i} \ell_{\text {perceptual}}\left(\tilde{G}\left(z_{i}\right), x_{i}\right) \quad \text { s.t. } \quad\left\|z_{i}\right\|=1$$ --></p>
+<div align="center"><img src="/images/GLANN/latent_emb.png"></div><br>不同的在于这里的loss函数采用VGG perceptual loss function。<br><br>### 隐空间采样<br>为了克服隐空间分布未知的缺陷，通过学习$T$函数，把另一个服从高斯分布的$e$隐变量映射到$z$所在的空间。这里借鉴IMLE模型，采用最近邻的方式，每次采样多个$e_t$变量，然后找到$z_t$对应最近的$T(e_t)$，然后对$z_t−T(e_t)$优化，具体的公式如下：<br><!-- $$\tilde{z}_{m}=T\left(e_{m}\right)$$ --><br><div align="center"><img src="/images/GLANN/eq2.png"></div>
+
+<p>$$e_{t}=\arg \min _{e_{m}}\left|z_{t}-T\left(e_{m}\right)\right|_{2}^{2}$$</p>
+<!-- $$T=\arg \min _{\tilde{T}} \sum_{t}\left\|z_{t}-\tilde{T}\left(e_{t}\right)\right\|_{2}^{2}$$ -->
+<div align="center"><img src="/images/GLANN/eq3.png"></div>
+
+<h3 id="生成图像"><a href="#生成图像" class="headerlink" title="生成图像"></a>生成图像</h3><p>当已经知道$e$变量和$z$变量的映射函数$T$，也知道$z$变量到图像的生成函数$G$，那么从高斯分布中采样$e$然后依次经过$T$和$G$函数可以得到生成的图像。<br>$$z_{e}=T(e)$$<br>$$I_{e}=G\left(z_{e}\right)$$</p>
+<h2 id="论文结果展示"><a href="#论文结果展示" class="headerlink" title="论文结果展示"></a>论文结果展示</h2><p>可以看出用L2 loss的IMLE生成图像效果最差。<br>GLO生成的图像，只有部分的模糊。<br>GAN生成的图像还是不错的，但在动物那里容易得到奇奇怪怪的图像。<br>GLANN生成的图像比较的好。</p>
+<div align="center"><img src="/images/GLANN/result.png"></div>
+
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>GLANN模型虽然是结合GLO和IMLE两者之间的优势，能够从一个分布中进行隐变量的采样然后生成图像，也能够无模式丢失的得到生成的函数。但感觉就是两者之间的拼接，创新其实并不大。</p>
 
       
     </div>
@@ -517,6 +549,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/图像/" rel="tag"># 图像</a>
+          
+            <a href="/tags/生成/" rel="tag"># 生成</a>
+          
+        </div>
+      
 
       
       
@@ -526,8 +566,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/21/腾讯社交广告高校算法大赛心得/" rel="next" title="腾讯社交广告高校算法大赛心得">
-                <i class="fa fa-chevron-left"></i> 腾讯社交广告高校算法大赛心得
+              <a href="/2019/02/28/Causal-Embeddings-for-Recommendation笔记/" rel="next" title="《Causal Embeddings for Recommendation》笔记">
+                <i class="fa fa-chevron-left"></i> 《Causal Embeddings for Recommendation》笔记
               </a>
             
           </div>
@@ -535,10 +575,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/28/Causal-Embeddings-for-Recommendation笔记/" rel="prev" title="《Causal Embeddings for Recommendation》笔记">
-                《Causal Embeddings for Recommendation》笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -710,7 +746,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成绩"><span class="nav-number">2.</span> <span class="nav-text">成绩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#赛题分析"><span class="nav-number">3.</span> <span class="nav-text">赛题分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征工程"><span class="nav-number">4.</span> <span class="nav-text">特征工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征选择"><span class="nav-number">5.</span> <span class="nav-text">特征选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型方法"><span class="nav-number">6.</span> <span class="nav-text">模型方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型融合"><span class="nav-number">7.</span> <span class="nav-text">模型融合</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">3.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GLO介绍"><span class="nav-number">4.</span> <span class="nav-text">GLO介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IMLE介绍"><span class="nav-number">5.</span> <span class="nav-text">IMLE介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GLANN介绍"><span class="nav-number">6.</span> <span class="nav-text">GLANN介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#隐变量学习"><span class="nav-number">6.1.</span> <span class="nav-text">隐变量学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成图像"><span class="nav-number">6.2.</span> <span class="nav-text">生成图像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文结果展示"><span class="nav-number">7.</span> <span class="nav-text">论文结果展示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感想"><span class="nav-number">8.</span> <span class="nav-text">感想</span></a></li></ol></div>
             
 
           </div>
