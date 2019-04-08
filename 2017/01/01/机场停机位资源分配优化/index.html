@@ -105,7 +105,7 @@
 <meta property="og:description" content="题目描述https://tianchi.shuju.aliyun.com/outsource/offer/projectdetails.htm?spm=5176.8199929.0.0.nPvIru&amp;amp;id=3092机场每天都有大量的航班起降，每个航班降落以后都会分配到一个指定的机位进行保障，保障结束以后再离开进行下一航段。为了保障每个航班都有相应的机位，机场会提前安排好第二天的所有飞机机位">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/airport/1.png">
-<meta property="og:updated_time" content="2019-03-27T16:08:48.260Z">
+<meta property="og:updated_time" content="2019-03-27T17:32:29.076Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机场停机位资源分配优化">
 <meta name="twitter:description" content="题目描述https://tianchi.shuju.aliyun.com/outsource/offer/projectdetails.htm?spm=5176.8199929.0.0.nPvIru&amp;amp;id=3092机场每天都有大量的航班起降，每个航班降落以后都会分配到一个指定的机位进行保障，保障结束以后再离开进行下一航段。为了保障每个航班都有相应的机位，机场会提前安排好第二天的所有飞机机位">
@@ -402,7 +402,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-28 00:08:48" itemprop="dateModified" datetime="2019-03-28T00:08:48+08:00">2019-03-28</time>
+                <time title="修改时间：2019-03-28 01:32:29" itemprop="dateModified" datetime="2019-03-28T01:32:29+08:00">2019-03-28</time>
               
             
           </span>
@@ -479,7 +479,7 @@
 <h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><p>按时间顺序遍历每个航班，对每个航班执行下面操作：尝试安排到其可安排的机位中，若当前机位能安排（能安排代表满足各种约束）就直接安排，若没有机位能安排当前航班，则当前航班不安排。<br>只需不到1秒的时间，生成了13.28的初始可行解。</p>
 <h2 id="破坏与重建算法"><a href="#破坏与重建算法" class="headerlink" title="破坏与重建算法"></a>破坏与重建算法</h2><p>步骤一、对一个已知的初始解，破坏掉一些已经被安排的航班，即一个破坏过程；<br>步骤二、对剩下已经安排的航班其机位保持不变，将当前所有未安排的航班使用线性规划模型求解当前情况下的最优解，即一个重建过程；<br>步骤三、重复此破坏与重建过程，持续对解进行优化，直到满足一个停止条件。</p>
 <p>算法评价：此算法通过破坏可以打破局部约束，使其可以达到一个更优的解；通过线性规划模型进行重建，使其可以得到当前情况下的最优解，这个解不会比初始解差；由于已分配机位的航班在时间上是均匀分布，影响剩下航班的分配，因此未分配的航班虽多但重建效率很快。</p>
-<h2 id="线性规划模型"><a href="#线性规划模型" class="headerlink" title="线性规划模型"></a>线性规划模型</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>二进制变量$g_{ij}∈G$表示航班分配机位的情况：<br>$$<br>g_{ij}=\begin{cases}<br>1&amp; \text{航班i分配到机位j}\\<br>0&amp; \text{航班i没有分配到机位j} \end{cases}<br>$$<br>滑道冲突的计算与机位的入滑道和出滑道有关，但和具体机位是无关的，具体不同滑道可以表示为$p_k∈P$;<br>二进制变量$d_{ik}∈D$表示航班滑道冲突的情况：<br>$$<br>d_{ik}∈\begin{cases}<br>1&amp;\text{航班i的滑道为$p_k$，且和其它航班滑道冲突}\\<br>0&amp;\text{航班i的滑道非$p_k$，或和其它航班没有滑道冲突}<br>\end{cases}<br>$$<br>每个航班的旅客人数用$h_i∈H$来表示，总的旅客人数为$h_sum=\sum_ih_i $；<br>定义总的航班数量为$n$，总的机位数量为$m$；</p>
+<h2 id="线性规划模型"><a href="#线性规划模型" class="headerlink" title="线性规划模型"></a>线性规划模型</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>二进制变量$g_{ij}∈G$表示航班分配机位的情况：<br>$$<br>g_{ij}=\begin{cases}<br>1&amp; \text{航班i分配到机位j}\\<br>0&amp; \text{航班i没有分配到机位j} \end{cases}<br>$$<br>滑道冲突的计算与机位的入滑道和出滑道有关，但和具体机位是无关的，具体不同滑道可以表示为$p_k∈P$;<br>二进制变量$d_{ik}∈D$表示航班滑道冲突的情况：<br>$$<br>d_{ik}∈\begin{cases}<br>1&amp;\text{航班i的滑道为$p_k$，且和其它航班滑道冲突}\\<br>0&amp;\text{航班i的滑道非$p_k$，或和其它航班没有滑道冲突}<br>\end{cases}<br>$$<br>每个航班的旅客人数用$h_i∈H$来表示，总的旅客人数为$h_{sum}=\sum_i$；<br>定义总的航班数量为$n$，总的机位数量为$m$；</p>
 <h3 id="目标函数"><a href="#目标函数" class="headerlink" title="目标函数"></a>目标函数</h3><p>$$F(G,P,D)=max\sum_{i,j}10×\frac{g_{ij}}{n}+3×\frac{g_{ij}×1\{机位j是近机位\}}{n}+3×g_{ij}×1\{机位j是近机位\}×\frac{h_i}{h_{sum}} -1×\frac{g_{ij}×1\{机位j是临时机位\}}{n}-\sum_{i,k}1×\frac{d_{ik}}{n}$$</p>
 <h3 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a>约束条件</h3><ol>
 <li>对于初始固定的航班添加约束：$$∀i,j航班i预先分配到机位j\longrightarrow g_{ij}=0$$$$∀i航班i不分配机位\longrightarrow∀j,g_{ij}=0$$</li>
@@ -664,7 +664,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

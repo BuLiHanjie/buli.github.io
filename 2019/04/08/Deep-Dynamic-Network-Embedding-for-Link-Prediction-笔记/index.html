@@ -96,21 +96,29 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+  <meta name="description" content="摘要通过考虑网络的历史演变过程，把各个时刻的网络快照映射到一个低维空间中，用以捕捉网络的时序演变以及网络结构。论文中，的DDNE算法，通过循环神经网络GRU反映节点嵌入的历史变化，使用类似SDNE算法中的loss进行优化，得到有效的节点嵌入。">
+<meta name="keywords" content="推荐,recommendation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep Dynamic Network Embedding for Link Prediction 笔记">
+<meta property="og:url" content="http://yoursite.com/2019/04/08/Deep-Dynamic-Network-Embedding-for-Link-Prediction-笔记/index.html">
 <meta property="og:site_name" content="布笠Blog">
+<meta property="og:description" content="摘要通过考虑网络的历史演变过程，把各个时刻的网络快照映射到一个低维空间中，用以捕捉网络的时序演变以及网络结构。论文中，的DDNE算法，通过循环神经网络GRU反映节点嵌入的历史变化，使用类似SDNE算法中的loss进行优化，得到有效的节点嵌入。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-16T05:38:08.491Z">
+<meta property="og:image" content="http://yoursite.com/images/DDNE/DDNE.png">
+<meta property="og:image" content="http://yoursite.com/images/DDNE/DDNE_loss.png">
+<meta property="og:image" content="http://yoursite.com/images/DDNE/SDNE.png">
+<meta property="og:updated_time" content="2019-04-08T07:18:22.225Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
+<meta name="twitter:title" content="Deep Dynamic Network Embedding for Link Prediction 笔记">
+<meta name="twitter:description" content="摘要通过考虑网络的历史演变过程，把各个时刻的网络快照映射到一个低维空间中，用以捕捉网络的时序演变以及网络结构。论文中，的DDNE算法，通过循环神经网络GRU反映节点嵌入的历史变化，使用类似SDNE算法中的loss进行优化，得到有效的节点嵌入。">
+<meta name="twitter:image" content="http://yoursite.com/images/DDNE/DDNE.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/08/Deep-Dynamic-Network-Embedding-for-Link-Prediction-笔记/">
 
 
 
@@ -120,7 +128,7 @@
   };
 </script>
 
-  <title>categories | 布笠Blog</title>
+  <title>Deep Dynamic Network Embedding for Link Prediction 笔记 | 布笠Blog</title>
   
 
 
@@ -257,7 +265,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -316,90 +324,220 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/08/Deep-Dynamic-Network-Embedding-for-Link-Prediction-笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="布笠">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="布笠Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">categories
-
-</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
+          <h1 class="post-title" itemprop="name headline">Deep Dynamic Network Embedding for Link Prediction 笔记
+
               
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-              目前共计 2 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/报告/">报告</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/竞赛/">竞赛</a><span class="category-list-count">4</span></li></ul>
-            </div>
-          </div>
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-08 10:51:12 / 修改时间：15:18:22" itemprop="dateCreated datePublished" datetime="2019-04-08T10:51:12+08:00">2019-04-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/报告/" itemprop="url" rel="index"><span itemprop="name">报告</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <a href="/2019/04/08/Deep-Dynamic-Network-Embedding-for-Link-Prediction-笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/04/08/Deep-Dynamic-Network-Embedding-for-Link-Prediction-笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>通过考虑网络的历史演变过程，把各个时刻的网络快照映射到一个低维空间中，用以捕捉网络的时序演变以及网络结构。论文中，的DDNE算法，通过循环神经网络GRU反映节点嵌入的历史变化，使用类似SDNE算法中的loss进行优化，得到有效的节点嵌入。<br><a id="more"></a> </p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>Li T, Zhang J, Philip S Y, et al. Deep dynamic network embedding for link prediction[J]. IEEE Access, 2018, 6: 29219-29230.<br>Wang D, Cui P, Zhu W. Structural deep network embedding[C]//Proceedings of the 22nd ACM SIGKDD international conference on Knowledge discovery and data mining. ACM, 2016: 1225-1234.</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>与静态网络相比，动态网络的节点嵌入需要同时考虑网络的时间信息以及网络的空间结构。因此，网络中不是时刻的快照都映射到一个低维空间中，节点在空间中的位置关系能够反映网络结构，不同时刻的节点嵌入差异也能反映网络的时序信息。论文中的DDNE算法框架图如下所示，主要包括encoder和decoder两部分，其中encoder利用GRU考虑节点的历史状态得到未来网络的节点嵌入，而decoder通过考虑网络的一阶和二阶邻近来进行优化。</p>
+<div align="center"><img src="/images/DDNE/DDNE.png">DDNE框架</div>
+
+<p>论文中，输入的$X^t(i,:)$表示节点$x$在$t$时刻与邻居节点连接情况。把历史的$N$个时刻连接状态输入到GRU中，得到的隐藏层状态拼接作为decoder的$c_i$。decoder中采用MLP的方式，非线性变换得到节点在$t$时刻的节点嵌入，然后再经过MLP的方式得到$\widehat{X}^{t}(i, :)$，预测节点与邻居节点的链接方式。最后通过损失函数进行优化：</p>
+<div align="center"><img src="/images/DDNE/DDNE_loss.png">DDNE损失函数</div>
+
+<p>其中，$L_{c}$计算的是一阶邻近，最小化连边节点的节点嵌入距离。$L_{s}$计算的是二阶邻近，极大化节点与邻居节点的连边概率，其中$Z$是用来平衡稀疏网络中0、1元素不平衡的问题。$L_{reg}$是正则化项。</p>
+<p>在静态网络的SDNE算法中，也有类似的框架，如下图所示。SDNE中也是先编码到节点嵌入然后再反编码预测节点与邻居的连接状态。损失函数也是一样的，通过节点嵌入的差异考虑一阶邻近，通过节点与邻居的连接关系考虑二阶邻近。DDNE算法中，不同的可能只是在于加入了GRU把历史状态进行编码。</p>
+<div align="center"><img src="/images/DDNE/SDNE.png">SDNE框架</div>
+
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>DDNE模型中，可以看出来总的是没什么创新的，只是基于SDNE算法上加入了GRU对历史状态进行编码。<br>而且在论文中它提到自己是第一个学习动态网络的节点嵌入，据我了解的动态网络的节点嵌入研究虽然并不是很多，但网上一搜还是能搜到很多的，如TNE(2016)、DynamicTriad(2017)、LIST(2018)、DynGraphGan(2019)，因此论文中也没有和相关的动态网络算法相比，emmm。。。好吧。总的来说，这篇论文没什么太大的借鉴意义的。</p>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/推荐/" rel="tag"># 推荐</a>
+          
+            <a href="/tags/recommendation/" rel="tag"># recommendation</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/19/GLANN笔记/" rel="next" title="GLANN笔记">
+                <i class="fa fa-chevron-left"></i> GLANN笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -433,8 +571,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -536,6 +683,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">3.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感想"><span class="nav-number">4.</span> <span class="nav-text">感想</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
