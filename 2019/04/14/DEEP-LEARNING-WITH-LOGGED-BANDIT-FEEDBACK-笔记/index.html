@@ -96,25 +96,27 @@
 
 
 
-  <meta name="description" content="感想写了这东西之后，就感觉自己像是立了个flag一样……">
-<meta name="keywords" content="算法,心得">
+  <meta name="description" content="摘要论文中提出BanditNet模型，能够利用bandit feedback数据，即实体标签服从某个分布的数据，能够有效地使用大量的数据训练已有的模型使之达到很好的效果。并且模型只需要较少的代价对模型重训练，能够达到全部数据的效果。论文中采用图像是别的数据验证模型效果，并不是传统意义上的有标签图像，其中图像的标签可能会发生变化。">
+<meta name="keywords" content="推荐,recommendation,bandit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="腾讯社交广告高校算法大赛心得">
-<meta property="og:url" content="http://yoursite.com/2017/05/21/腾讯社交广告高校算法大赛心得/index.html">
+<meta property="og:title" content="DEEP LEARNING WITH LOGGED BANDIT FEEDBACK 笔记">
+<meta property="og:url" content="http://yoursite.com/2019/04/14/DEEP-LEARNING-WITH-LOGGED-BANDIT-FEEDBACK-笔记/index.html">
 <meta property="og:site_name" content="布笠Blog">
-<meta property="og:description" content="感想写了这东西之后，就感觉自己像是立了个flag一样……">
+<meta property="og:description" content="摘要论文中提出BanditNet模型，能够利用bandit feedback数据，即实体标签服从某个分布的数据，能够有效地使用大量的数据训练已有的模型使之达到很好的效果。并且模型只需要较少的代价对模型重训练，能够达到全部数据的效果。论文中采用图像是别的数据验证模型效果，并不是传统意义上的有标签图像，其中图像的标签可能会发生变化。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-16T16:33:29.371Z">
+<meta property="og:image" content="http://yoursite.com/images/bandinet/experiment.png">
+<meta property="og:updated_time" content="2019-04-15T17:52:51.351Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="腾讯社交广告高校算法大赛心得">
-<meta name="twitter:description" content="感想写了这东西之后，就感觉自己像是立了个flag一样……">
+<meta name="twitter:title" content="DEEP LEARNING WITH LOGGED BANDIT FEEDBACK 笔记">
+<meta name="twitter:description" content="摘要论文中提出BanditNet模型，能够利用bandit feedback数据，即实体标签服从某个分布的数据，能够有效地使用大量的数据训练已有的模型使之达到很好的效果。并且模型只需要较少的代价对模型重训练，能够达到全部数据的效果。论文中采用图像是别的数据验证模型效果，并不是传统意义上的有标签图像，其中图像的标签可能会发生变化。">
+<meta name="twitter:image" content="http://yoursite.com/images/bandinet/experiment.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/21/腾讯社交广告高校算法大赛心得/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/14/DEEP-LEARNING-WITH-LOGGED-BANDIT-FEEDBACK-笔记/">
 
 
 
@@ -124,7 +126,7 @@
   };
 </script>
 
-  <title>腾讯社交广告高校算法大赛心得 | 布笠Blog</title>
+  <title>DEEP LEARNING WITH LOGGED BANDIT FEEDBACK 笔记 | 布笠Blog</title>
   
 
 
@@ -340,7 +342,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/21/腾讯社交广告高校算法大赛心得/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/14/DEEP-LEARNING-WITH-LOGGED-BANDIT-FEEDBACK-笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="布笠">
@@ -357,7 +359,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">腾讯社交广告高校算法大赛心得
+          <h1 class="post-title" itemprop="name headline">DEEP LEARNING WITH LOGGED BANDIT FEEDBACK 笔记
 
               
             
@@ -383,7 +385,7 @@
                 
               
 
-              <time title="创建时间：2017-05-21 13:31:28" itemprop="dateCreated datePublished" datetime="2017-05-21T13:31:28+08:00">2017-05-21</time>
+              <time title="创建时间：2019-04-14 01:32:45" itemprop="dateCreated datePublished" datetime="2019-04-14T01:32:45+08:00">2019-04-14</time>
             
 
             
@@ -400,7 +402,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-17 00:33:29" itemprop="dateModified" datetime="2019-01-17T00:33:29+08:00">2019-01-17</time>
+                <time title="修改时间：2019-04-16 01:52:51" itemprop="dateModified" datetime="2019-04-16T01:52:51+08:00">2019-04-16</time>
               
             
           </span>
@@ -417,7 +419,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/竞赛/" itemprop="url" rel="index"><span itemprop="name">竞赛</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/报告/" itemprop="url" rel="index"><span itemprop="name">报告</span></a></span>
 
                 
                 
@@ -435,8 +437,8 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
             
-                <a href="/2017/05/21/腾讯社交广告高校算法大赛心得/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/05/21/腾讯社交广告高校算法大赛心得/" itemprop="commentCount"></span>
+                <a href="/2019/04/14/DEEP-LEARNING-WITH-LOGGED-BANDIT-FEEDBACK-笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/04/14/DEEP-LEARNING-WITH-LOGGED-BANDIT-FEEDBACK-笔记/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -471,11 +473,16 @@
       
 
       
-        <h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>写了这东西之后，就感觉自己像是立了个flag一样……<br><a id="more"></a></p>
-<h2 id="特征的选择"><a href="#特征的选择" class="headerlink" title="特征的选择"></a>特征的选择</h2><p>　　关于特征选择，其中有两个方面是应该值得关注的。<br>　　一方面是特征的重要性，特征的重要性反映的是特征对模型效果的影响程度，理论上重要性越高的特征应该保留下来，而重要性较低的会考虑删除。特征越多，会使得模型越复杂，减少不必要的特征会使得模型更加稳定。其中常用的方法可以考虑xgboost中计算的特征重要性，或者是通过扰乱某个特征值的次序根据模型效果变化来得出。特征重要性计算的方法不少，大家可以再网上查找一下。<br>　　另一方面是特征分布是否一致，特征分布主要考虑的是线上和线下的分布差异。由于这次比赛的数据具有时序性，并且很多选手也因为在提取特征时因为信息泄露的原因导致线下成绩提升而线上成绩降低，这些问题都可以通过特征值的分布差异来排除掉，当分布不一致的特征，我们应该优先删除。特征分布差异，简单的可以通过线下和线上特征值的均值、标准差差异来考虑，或者基于其它的统计学的方法。<br>通过特征的重要性和分布综合考虑，应该就可以得到比较理想的特征效果了。</p>
-<h2 id="特征生成"><a href="#特征生成" class="headerlink" title="特征生成"></a>特征生成</h2><p>　　关于特征生成，大体上可以分为两个大方向。<br>　　一个方向就是俗称的“拍脑袋”，根据个人对于数据观测、题目理解等考虑，得出的一系列规则转化为特征。这样很容易就会产生一系列有用或者无用的特征（比如one-hot、各种的转化率、点击量等特征），其中很多的特征所代表的意义其实是重复的，比如对各种ID做转化率的特征，当特征数量越来越多后，提取这类的特征会显得毫无意义。所以应该多角度的来提取特征，使得特征之间形成互补。<br>　　一方面是通过其它模型的结果来生成各种特征，其中能否通过深度学习来产生新的特征？LDA来分析用户和app之间的关系？特征之间不断的组合能否产生比较好的特征？这需要通过对数据的理解，不断的尝试和分析。不过我的并不建议那么快的考虑用其它的模型来生成特征，毕竟这种方法生成的特征有时候并不能很好的理解，并且需要的工作量也比较大，有时候生成的特征也并不一定有效果。</p>
-<h2 id="模型的理解"><a href="#模型的理解" class="headerlink" title="模型的理解"></a>模型的理解</h2><p>　　群里面很多的同学知道该用哪个模型，但是并没有理解模型的原理，所以把很多的时间浪费在模型的选取和调参上。事实上，我们应该先对模型有个比较基础的了解，明白模型以及各个参数的原理，这样才能指引我们如果去生成模型适合使用的特征以及怎样去调参。比如，我选取的模型是xgboost，基本上我是没怎么使用one-hot的特征。<br>　　对于刚开始比赛来讲，模型应该是简单点比较好，这样主要为了方便特征的生成和选择。当特征方面的工作做到一定的程度上，则可以考虑更复杂的模型来提高效果了。至于模型融合等方面的资料，可以参考网上历来各种比赛分享的资料了。</p>
-<h2 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h2><p>　　参加比赛的时候，很多时候选手会因为效果不好等各种原因难免产生比较浮躁和消极的情绪。但我觉得，参加比赛来讲，最重要的是在比赛中有所收获并且提升自己，最直接的方法就是多想多做，而不是光想不做。毕竟比赛的竞争是比较激烈的，获奖的名额比例也不高。或许最后什么名次也没拿到，但是通过不断的提升自己或许以后工作可以升职加薪呢，而这样算下来的钱应该比一个比赛的奖金要多吧。</p>
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>论文中提出BanditNet模型，能够利用bandit feedback数据，即实体标签服从某个分布的数据，能够有效地使用大量的数据训练已有的模型使之达到很好的效果。并且模型只需要较少的代价对模型重训练，能够达到全部数据的效果。论文中采用图像是别的数据验证模型效果，并不是传统意义上的有标签图像，其中图像的标签可能会发生变化。<br><a id="more"></a> </p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>Joachims T, Swaminathan A, de Rijke M. Deep learning with logged bandit feedback[J]. 2018.</li>
+<li>Swaminathan A, Joachims T. The self-normalized estimator for counterfactual learning[C]//advances in neural information processing systems. 2015: 3231-3239.</li>
+</ul>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在推荐系统中，后台中的log数据通常能够反映系统的性能以及用户的浏览经历，如广告投放系统中包括广告投放数据和用户是否点击数据。但每一个数据是通过系统产生展示实体给用户，用户对实体的行为反馈产生了数据。其中系统的推荐行为只是所有可能行为中的子集，所以得到用户反馈是由推荐系统所直接影响，这叫做bandit feedback。由和传统的有监督学习不同的在于我们不知道所有行为的真实反馈，即用户在其它实体上的行为反馈。论文中的目的是在bandit feedback数据上进行训练，即使不是在全部数据上进行训练，也能够得到很好的效果。</p>
+<p>假设输入$x \in \mathcal{X}$，服从一个未知的分布$\operatorname{Pr}(\mathcal{X})$。输出假设为$y \in \mathcal{Y}$，其中$y$服从条件概率分布$\pi_{w}(Y | x)$。输入和动作之间也会有一个得分反馈$\delta(x, y)$。通俗来讲，在推荐系统中，$x$可以表示为用户和浏览网页，$y$表示展示的广告，$\delta(x, y)$当用户点击广告时为1否则为0，$\pi_{w}(Y | x)$即推荐系统基于用户和网页信息计算得出的广告推荐的概率分布。简单的，每个动作$y$的推荐概率可以用softmax的形式表达：<br>$$\pi_{w}(y | x)=\frac{\exp \left(f_{w}(x, y)\right)}{\sum_{y^{\prime} \in \mathcal{Y}} \exp \left(f_{w}\left(x, y^{\prime}\right)\right)}$$<br>因此一般情况下，系统的学习目标在于找到最好的策略$\pi_{w}$最大化收益，即最大化点击率等：<br>$$R\left(\pi_{w}\right)=\underset{x \sim \operatorname{Pr}(X)}{\mathbb{E}}\underset{ y \sim \pi_{w}(Y | x)}{\mathbb{E}}[\delta(x, y)]$$<br>但训练的数据都是经过原先的推荐策略$\pi_{0}$采样得到，即$y \sim\pi_{0}$，由于$\pi_{w}\neq \pi_{0}$，不能直接代入数据优化$R\left(\pi_{w}\right)$。<br>重新修正$y$的分布，可以得到以下的目标期望：<br>$$R\left(\pi_{w}\right)=\underset{x \sim \operatorname{Pr}(X)}{\mathbb{E}}\underset{ y \sim \pi_{w}(Y | x)}{\mathbb{E}}[\delta(x, y)]=\underset{x \sim \operatorname{Pr}(X)}{\mathbb{E}}\underset{ y \sim \pi_{0}(Y | x)}{\mathbb{E}}\left[\delta(x, y)\frac{\pi_{w}(y | x)}{\pi_{0}(y | x)}\right]$$<br>通过历史推荐策略$\pi_{0}$产生的数据，优化目标函数：<br>$$\hat R_{I P S}\left(\pi_{w}\right)=\frac{1}{n} \sum_{i=1}^{n} \delta_{i} \frac{\pi_{w}\left(y_{i} | x_{i}\right)}{\pi_{0}\left(y_{i} | x_{i}\right)}$$<br>但公式中存在着倾向性过拟合（propensity overfittin）的问题。在$R\left(\pi_{w}\right)$中发生一个偏移，和得分反馈$\delta(x, y)$发生偏移在期望计算中是结果是相同的，使得期望发生线性偏移。但事实上，$\hat R_{I P S}$的计算和期望的不一样：<br>$$c+\min_{w} \frac{1}{n} \sum_{i=1}^{n} \delta_{i} \frac{\pi_{w}\left(y_{i} | x_{i}\right)}{\pi_{0}\left(y_{i} | x_{i}\right)} \neq \min_{w} \frac{1}{n} \sum_{i=1}^{n}\left(\delta_{i}+c\right) \frac{\pi_{w}\left(y_{i} | x_{i}\right)}{\pi_{0}\left(y_{i} | x_{i}\right)}$$<br>算法优化的过程中更关注低概率的$\pi_{0}\left(y_{i} | x_{i}\right)$。所以优化目标会收到历史推荐策略的影响，而不仅仅是实际动作。<br>采用self-normalized IPS estimator的方式，可以将目标函数转化为：<br>$$\hat R_{S N I P S}\left(\pi_{w}\right)=\frac{\frac{1}{n} \sum_{i=1}^{n} \delta_{i} \frac{\pi_{w}\left(y_{i} | x_{i}\right)}{\pi_{0}\left(y_{i} | x_{i}\right)}}{\frac{1}{n} \sum_{i=1}^{n} \frac{\pi_{w}\left(y_{i} | x_{i}\right)}{\pi_{0}\left(y_{i} | x_{i}\right)}}$$<br>这里相当于对已有的进行归一化权重，和之前的相比效果更精确。并且容易得知当发生偏移$\delta_{i}+c$时，$\hat R_{S N I P S}\left(\pi_{w}\right)$同样也会有偏移$c$，因此目标函数和反馈之间是等变化的。<br>记$S:=\quad \frac{1}{n} \sum_{i=1}^{n} \frac{\pi_{w}\left(y_{i} | x_{i}\right)}{\pi_{0}\left(y_{i} | x_{i}\right)}$，当数据样本趋向于无穷大时，容易得知$S$会趋向$1$：<br>$$\mathbb{E}[S]=\frac{1}{n} \sum_{i=1}^{n} \int \frac{\pi_{w}\left(y_{i} | x_{i}\right)}{\pi_{0}\left(y_{i} | x_{i}\right)} \pi_{0}\left(y_{i} | x_{i}\right) \operatorname{Pr}\left(x_{i}\right) d y_{i} d x_{i}=\frac{1}{n} \sum_{i=1}^{n} \int 1 \operatorname{Pr}\left(x_{i}\right) d x_{i}=1$$<br>假设$S=1$代入,并且采用拉普拉斯乘子加入限制的条件：<br>$$L(w, \lambda)=\frac{1}{n} \sum_{i=1}^{n} \frac{\delta_{i} \pi_{w}\left(y_{i} | x_{i}\right)}{\pi_{0}\left(y_{i} | x_{i}\right)}-\lambda\left[\frac{1}{n}\left(\sum_{i=1}^{n} \frac{\pi_{w}\left(y_{i} | x_{i}\right)}{\pi_{0}\left(y_{i} | x_{i}\right)}\right)-S_{j}\right]=\frac{1}{n} \sum_{i=1}^{n} \frac{\left(\delta_{i}-\lambda\right) \pi_{w}\left(y_{i} | x_{i}\right)}{\pi_{0}\left(y_{i} | x_{i}\right)}+\lambda S_{j}$$<br>如公式所示，$S_j$是枚举的$\quad \frac{1}{n} \sum_{i=1}^{n} \frac{\pi_{w}\left(y_{i} | x_{i}\right)}{\pi_{0}\left(y_{i} | x_{i}\right)}$大小，通过超参$\lambda$控制权重。事实上由于$S$趋向1，程序中的实习是设定$S_j=1$，所以最后目标函数只是得分反馈减去超参$\lambda$。<br>实验结果中表明，利用bandit feedback的数据进行训练也能得到和全部数据一起训练的效果。</p>
+<div align="center"><img src="/images/bandinet/experiment.png"></div>
+
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>这篇论文中，其实很多细节我都没有弄的很清楚。但是能够帮我去理解，推荐系统如何利用新的数据进行增量学习，有比较好的启发。</p>
 
       
     </div>
@@ -499,9 +506,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/推荐/" rel="tag"># 推荐</a>
           
-            <a href="/tags/心得/" rel="tag"># 心得</a>
+            <a href="/tags/recommendation/" rel="tag"># recommendation</a>
+          
+            <a href="/tags/bandit/" rel="tag"># bandit</a>
           
         </div>
       
@@ -514,8 +523,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/01/机场停机位资源分配优化/" rel="next" title="机场停机位资源分配优化">
-                <i class="fa fa-chevron-left"></i> 机场停机位资源分配优化
+              <a href="/2019/04/08/Deep-Dynamic-Network-Embedding-for-Link-Prediction-笔记/" rel="next" title="Deep Dynamic Network Embedding for Link Prediction 笔记">
+                <i class="fa fa-chevron-left"></i> Deep Dynamic Network Embedding for Link Prediction 笔记
               </a>
             
           </div>
@@ -523,10 +532,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/08/腾讯社交广告高校算法大赛总结/" rel="prev" title="腾讯社交广告高校算法大赛总结">
-                腾讯社交广告高校算法大赛总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -700,7 +705,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#感想"><span class="nav-number">1.</span> <span class="nav-text">感想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征的选择"><span class="nav-number">2.</span> <span class="nav-text">特征的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征生成"><span class="nav-number">3.</span> <span class="nav-text">特征生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型的理解"><span class="nav-number">4.</span> <span class="nav-text">模型的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建议"><span class="nav-number">5.</span> <span class="nav-text">建议</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">3.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感想"><span class="nav-number">4.</span> <span class="nav-text">感想</span></a></li></ol></div>
             
 
           </div>
